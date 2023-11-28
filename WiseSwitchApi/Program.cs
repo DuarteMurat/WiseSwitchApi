@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using WiseSwitchApi;
+using WiseSwitchApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

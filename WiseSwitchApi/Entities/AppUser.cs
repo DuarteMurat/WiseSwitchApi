@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace WiseSwitch.Data.Identity
+namespace WiseSwitchApi.Entities
 {
     public class AppUser : IdentityUser
     {

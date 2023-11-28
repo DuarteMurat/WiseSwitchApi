@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using WiseSwitch.Data.Entities;
-using WiseSwitch.Data.Identity;
+using WiseSwitchApi.Entities;
 
-namespace WiseSwitchApi
+namespace WiseSwitchApi.Data
 {
     public class DataContext : IdentityDbContext<AppUser>
     {

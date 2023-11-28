@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WiseSwitch.Data.Entities
+namespace WiseSwitchApi.Entities
 {
     public class SwitchModel : IEntity
     {

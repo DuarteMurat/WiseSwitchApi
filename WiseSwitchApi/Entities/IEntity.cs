@@ -1,4 +1,4 @@
-﻿namespace WiseSwitch.Data.Entities
+﻿namespace WiseSwitchApi.Entities
 {
     public interface IEntity
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace WiseSwitch.Data.Entities
+namespace WiseSwitchApi.Entities
 {
     [Index(nameof(Name), IsUnique = true)]
     public class Manufacturer : IEntity
