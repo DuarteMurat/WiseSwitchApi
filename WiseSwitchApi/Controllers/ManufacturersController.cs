@@ -9,7 +9,7 @@ namespace WiseSwitchApi.Controllers
     public class ManufacturersController : ControllerBase
     {
         // GET: api/<ManufacturersController>
-        [HttpGet]
+        [HttpGet (Name = "GetManufacturers")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
