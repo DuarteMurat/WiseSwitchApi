@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WiseSwitchApi.Entities;
+using WiseSwitchApi.Repository.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +10,17 @@ namespace WiseSwitchApi.Controllers
     [ApiController]
     public class ManufacturersController : ControllerBase
     {
-        // GET: api/<ManufacturersController>
-        [HttpGet (Name = "GetManufacturers")]
-        public IEnumerable<string> Get()
+        private readonly IManufacturerRepository _manufacturerRepository;
+
+        public ManufacturersController(IManufacturerRepository manufacturerRepository)
         {
-            return new string[] { "value1", "value2" };
+            _manufacturerRepository = manufacturerRepository;
+        }
+        // GET: api/<ManufacturersController>
+        [HttpGet(Name = "GetManufacturers")]
+        public async Task<IEnumerable<Manufacturer>> Get()
+        {
+            return await _manufacturerRepository.GetAllOrderByName();
         }
 
         // POST api/<ManufacturersController>
