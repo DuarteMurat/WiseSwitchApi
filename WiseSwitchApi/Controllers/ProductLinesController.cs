@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WiseSwitchApi.Dtos;
-using WiseSwitchApi.Entities;
-using WiseSwitchApi.Repository;
 using WiseSwitchApi.Repository.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -16,7 +14,7 @@ namespace WiseSwitchApi.Controllers
 
         public ProductLinesController(IProductLineRepository productLineRepository)
         {
-             _productLineRepository = productLineRepository;
+            _productLineRepository = productLineRepository;
         }
         // GET: api/<ProductLinesController>
         [HttpGet(Name = "GetProductLines")]

@@ -9,6 +9,6 @@ namespace WiseSwitchApi.Entities
         [Required]
         public string Version { get; set; }
 
-        public DateTime LaunchDate { get; set; }
+        public DateTime? LaunchDate { get; set; }
     }
 }
