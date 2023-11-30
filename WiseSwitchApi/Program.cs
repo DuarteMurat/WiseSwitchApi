@@ -24,7 +24,12 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(cfg =>
     cfg.Password.RequiredLength = 1;
 }).AddEntityFrameworkStores<DataContext>();
 
+builder.Services.AddTransient<InitDb>();
+
 builder.Services.AddScoped<IIdentityManager, IdentityManager>();
+
+builder.Services.AddScoped<IDataUnit, DataUnit>();
+
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IFirmwareVersionRepository, FirmwareVersionRepository>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
@@ -39,16 +44,26 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+await InitDatabase(app);
+async Task InitDatabase(IHost host)
+{
+    var scopedFactory = host.Services.GetService<IServiceScopeFactory>();
 
+    using var scope = scopedFactory?.CreateScope();
+
+    var initDb = scope?.ServiceProvider.GetService<InitDb>();
+
+    await initDb.SeedAsync();
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -24,12 +24,12 @@ namespace WiseSwitchApi.Entities
         public FirmwareVersion DefaultFirmwareVersion { get; set; }
 
 
-        public int ScriptId { get; set; }
+        public int? ScriptId { get; set; }
 
         public Script Script { get; set; }
 
 
-        public int TutorialId { get; set; }
+        public int? TutorialId { get; set; }
 
         public Tutorial Tutorial { get; set; }
     }
