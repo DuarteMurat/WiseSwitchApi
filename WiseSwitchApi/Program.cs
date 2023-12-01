@@ -4,6 +4,7 @@ using WiseSwitchApi.Entities;
 using WiseSwitchApi.Repository.Interfaces;
 using WiseSwitchApi.Repository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,8 +42,11 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.EnableAnnotations();
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+});
 var app = builder.Build();
 await InitDatabase(app);
 async Task InitDatabase(IHost host)
@@ -62,7 +66,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 

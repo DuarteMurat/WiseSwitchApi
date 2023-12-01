@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel;
 using WiseSwitchApi.Data;
 using WiseSwitchApi.Helpers;
 using WiseSwitchApi.Repository.Interfaces;
@@ -22,7 +24,8 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/<BrandsController>
-        [HttpGet(Name = "All")]
+        [HttpGet, ActionName("All")]
+        [SwaggerOperation(Summary = "Get all brands")]
         public async Task<IActionResult> GetAllBrands()
         {
             try
@@ -46,7 +49,8 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/<BrandsController>/2
-        [HttpGet("{id}", Name = "Display")]
+        [HttpGet("{id}"), ActionName("Display")]
+        [SwaggerOperation(Summary = "Get a brand by Id")]
         public async Task<IActionResult> GetDisplayViewModelAsync(int id)
         {
             try
@@ -68,8 +72,6 @@ namespace WiseSwitchApi.Controllers
 
             return Ok(_apiResponse);
         }
-
-
 
         // PUT api/<BrandController>/5
         [HttpPut("{id}")]
