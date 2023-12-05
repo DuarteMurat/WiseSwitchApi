@@ -76,16 +76,30 @@ namespace WiseSwitchApi.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetComboProductLinesOfBrandAsync(int brandId)
+        public async Task<IEnumerable<SelectListItem>> GetComboProductLinesOfBrandAsync(int productLineId)
         {
             return await _productLineDbSet
-                .Where(productLine => productLine.BrandId == brandId)
+                .Where(productLine => productLine.BrandId == productLineId)
                 .Select(productLine => new SelectListItem
                 {
                     Text = productLine.Name,
                     Value = productLine.Id.ToString()
                 })
                 .ToListAsync();
+        }
+
+        public async Task<DisplayProductLineDto> GetDisplayDtoAsync(int id)
+        {
+            return await _productLineDbSet
+                .Where(productLine => productLine.Id == id)
+                .Select(productLine => new DisplayProductLineDto
+                {
+                    Id = productLine.Id,
+                    Name = productLine.Name,
+                    BrandName = productLine.Brand.Name,
+                    ProductSeriesNames = productLine.ProductSeries.Select(productSeries => productSeries.Name),
+                })
+                .SingleOrDefaultAsync();
         }
 
         public async Task<int> GetIdFromNameAsync(string name)
@@ -96,10 +110,10 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<string>> GetProductLinesNamesOfBrandAsync(int brandId)
+        public async Task<IEnumerable<string>> GetProductLinesNamesOfBrandAsync(int productLineId)
         {
             return await _productLineDbSet
-                .Where(productLine => productLine.BrandId == brandId)
+                .Where(productLine => productLine.BrandId == productLineId)
                 .Select(productLine => productLine.Name)
                 .ToListAsync();
         }

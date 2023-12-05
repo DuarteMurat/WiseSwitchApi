@@ -18,5 +18,7 @@ namespace WiseSwitchApi.Repository.Interfaces
         Task<int> GetIdFromNameAsync(string name);
         Task<IEnumerable<string>> GetProductLinesNamesOfBrandAsync(int brandId);
         void Update(ProductLine productLine);
+
+        Task<DisplayProductLineDto> GetDisplayDtoAsync(int id);
     }
 }
