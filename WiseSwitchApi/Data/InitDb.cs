@@ -31,12 +31,12 @@ namespace WiseSwitchApi.Data
             await SeedRolesAsync();
             await SeedUsersAsync();
 
-            //await SeedManufacturersAsync();
-            //await SeedBrandsAsync();
-            //await SeedProductLinesAsync();
-            //await SeedProductSeriesAsync();
-            //await SeedFirmwareVersionsAsync();
-            //await SeedSwitchModelsAsync();
+            await SeedManufacturersAsync();
+            await SeedBrandsAsync();
+            await SeedProductLinesAsync();
+            await SeedProductSeriesAsync();
+            await SeedFirmwareVersionsAsync();
+            await SeedSwitchModelsAsync();
 
             await SaveChangesAsync();
         }
