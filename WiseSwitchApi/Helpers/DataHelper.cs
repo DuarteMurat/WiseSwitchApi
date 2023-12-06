@@ -18,6 +18,13 @@ namespace WiseSwitchApi.Helpers
         {
             switch (dataOperation)
             {
+                // Product Lines.
+                case DataOperations.GetAllProductLinesOrderByName: return await _dataUnit.ProductLines.GetAllOrderByName();
+                case DataOperations.GetComboProductLines: return await _dataUnit.ProductLines.GetComboProductLinesAsync();
+                case DataOperations.GetDisplayProductLine: return await _dataUnit.ProductLines.GetDisplayDtoAsync((int)value);
+                case DataOperations.GetExistsProductLine: return await _dataUnit.ProductLines.ExistsAsync((int)value);
+                case DataOperations.GetModelProductLine: return await _dataUnit.ProductLines.GetAsNoTrackingByIdAsync((int)value);
+                // Manufacturer.
                 case DataOperations.GetAllManufacturersOrderByName: return await _dataUnit.Manufacturers.GetAllOrderByName();
                 case DataOperations.GetComboManufacturers: return await _dataUnit.Manufacturers.GetComboManufacturersAsync();
                 case DataOperations.GetDisplayManufacturer: return await _dataUnit.Manufacturers.GetDisplayDtoAsync((int)value);
@@ -32,9 +39,10 @@ namespace WiseSwitchApi.Helpers
         // Post data.
         public async Task<IEntity> PostDataAsync(string dataOperation, object value)
         {
-            var posted = dataOperation switch
+            IEntity posted = dataOperation switch
             {
                 DataOperations.CreateManufacturer => await _dataUnit.Manufacturers.CreateAsync(value as Manufacturer),
+                DataOperations.CreateProductLine => await _dataUnit.ProductLines.CreateAsync(value as ProductLine),
 
                 _ => throw new InvalidOperationException(dataOperation)
             };
@@ -50,10 +58,10 @@ namespace WiseSwitchApi.Helpers
         // Put data.
         public async Task<IEntity> PutDataAsync(string dataOperation, object value)
         {
-            var putted = dataOperation switch
+            IEntity putted = dataOperation switch
             {
                 DataOperations.UpdateManufacturer => _dataUnit.Manufacturers.Update(value as Manufacturer),
-
+                DataOperations.UpdateProductLine => _dataUnit.ProductLines.Update(value as ProductLine),
                 _ => throw new InvalidOperationException(dataOperation)
             };
 
@@ -68,10 +76,10 @@ namespace WiseSwitchApi.Helpers
         // Delete data.
         public async Task<IEntity> DeleteDataAsync(string dataOperation, object value)
         {
-            var deleted = dataOperation switch
+            IEntity deleted = dataOperation switch
             {
                 DataOperations.DeleteManufacturer => await _dataUnit.Manufacturers.DeleteAsync((int)value),
-
+                DataOperations.DeleteProductLine => await _dataUnit.ProductLines.DeleteAsync((int)value),
                 _ => throw new InvalidOperationException(dataOperation)
             };
 
