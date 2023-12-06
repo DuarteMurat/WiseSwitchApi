@@ -18,18 +18,24 @@ namespace WiseSwitchApi.Helpers
         {
             switch (dataOperation)
             {
-                // Product Lines.
-                case DataOperations.GetAllProductLinesOrderByName: return await _dataUnit.ProductLines.GetAllOrderByName();
-                case DataOperations.GetComboProductLines: return await _dataUnit.ProductLines.GetComboProductLinesAsync();
-                case DataOperations.GetDisplayProductLine: return await _dataUnit.ProductLines.GetDisplayDtoAsync((int)value);
-                case DataOperations.GetExistsProductLine: return await _dataUnit.ProductLines.ExistsAsync((int)value);
-                case DataOperations.GetModelProductLine: return await _dataUnit.ProductLines.GetAsNoTrackingByIdAsync((int)value);
                 // Manufacturer.
                 case DataOperations.GetAllManufacturersOrderByName: return await _dataUnit.Manufacturers.GetAllOrderByName();
                 case DataOperations.GetComboManufacturers: return await _dataUnit.Manufacturers.GetComboManufacturersAsync();
                 case DataOperations.GetDisplayManufacturer: return await _dataUnit.Manufacturers.GetDisplayDtoAsync((int)value);
                 case DataOperations.GetExistsManufacturer: return await _dataUnit.Manufacturers.ExistsAsync((int)value);
                 case DataOperations.GetModelManufacturer: return await _dataUnit.Manufacturers.GetAsNoTrackingByIdAsync((int)value);
+                // Product Lines.
+                case DataOperations.GetAllProductLinesOrderByName: return await _dataUnit.ProductLines.GetAllOrderByName();
+                case DataOperations.GetComboProductLines: return await _dataUnit.ProductLines.GetComboProductLinesAsync();
+                case DataOperations.GetDisplayProductLine: return await _dataUnit.ProductLines.GetDisplayDtoAsync((int)value);
+                case DataOperations.GetExistsProductLine: return await _dataUnit.ProductLines.ExistsAsync((int)value);
+                case DataOperations.GetModelProductLine: return await _dataUnit.ProductLines.GetAsNoTrackingByIdAsync((int)value);
+                // Product Series.
+                case DataOperations.GetAllProductSeriesOrderByName: return await _dataUnit.ProductSeries.GetAllOrderByName();
+                case DataOperations.GetComboProductSeries: return await _dataUnit.ProductSeries.GetComboProductSeriesAsync();
+                case DataOperations.GetDisplayProductSeries: return await _dataUnit.ProductSeries.GetDisplayDtoAsync((int)value);
+                case DataOperations.GetExistsProductSeries: return await _dataUnit.ProductSeries.ExistsAsync((int)value);
+                case DataOperations.GetModelProductSeries: return await _dataUnit.ProductSeries.GetAsNoTrackingByIdAsync((int)value);
 
                 default: throw new InvalidOperationException(dataOperation);
             };
@@ -43,6 +49,7 @@ namespace WiseSwitchApi.Helpers
             {
                 DataOperations.CreateManufacturer => await _dataUnit.Manufacturers.CreateAsync(value as Manufacturer),
                 DataOperations.CreateProductLine => await _dataUnit.ProductLines.CreateAsync(value as ProductLine),
+                DataOperations.CreateProductSeries => await _dataUnit.ProductSeries.CreateAsync(value as ProductSeries),
 
                 _ => throw new InvalidOperationException(dataOperation)
             };
@@ -62,6 +69,7 @@ namespace WiseSwitchApi.Helpers
             {
                 DataOperations.UpdateManufacturer => _dataUnit.Manufacturers.Update(value as Manufacturer),
                 DataOperations.UpdateProductLine => _dataUnit.ProductLines.Update(value as ProductLine),
+                DataOperations.UpdateProductSeries => _dataUnit.ProductSeries.Update(value as ProductSeries),
                 _ => throw new InvalidOperationException(dataOperation)
             };
 
@@ -80,6 +88,7 @@ namespace WiseSwitchApi.Helpers
             {
                 DataOperations.DeleteManufacturer => await _dataUnit.Manufacturers.DeleteAsync((int)value),
                 DataOperations.DeleteProductLine => await _dataUnit.ProductLines.DeleteAsync((int)value),
+                DataOperations.DeleteProductSeries => await _dataUnit.ProductSeries.DeleteAsync((int)value),
                 _ => throw new InvalidOperationException(dataOperation)
             };
 

@@ -17,16 +17,16 @@ namespace WiseSwitchApi.Repository
         }
 
 
-        public async Task CreateAsync(ProductSeries productSeries)
+        public async Task<ProductSeries> CreateAsync(ProductSeries productSeries)
         {
-            await _productSeriesDbSet.AddAsync(productSeries);
+            return (await _productSeriesDbSet.AddAsync(productSeries)).Entity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<ProductSeries> DeleteAsync(int id)
         {
-            _productSeriesDbSet.Remove(
+            return _productSeriesDbSet.Remove(
                 await _productSeriesDbSet
-                    .SingleAsync(productSeries => productSeries.Id == id));
+                    .SingleAsync(productSeries => productSeries.Id == id)).Entity;
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -138,9 +138,9 @@ namespace WiseSwitchApi.Repository
                 .ToListAsync();
         }
 
-        public void Update(ProductSeries productSeries)
+        public ProductSeries Update(ProductSeries productSeries)
         {
-            _productSeriesDbSet.Update(productSeries);
+            return _productSeriesDbSet.Update(productSeries).Entity;
         }
     }
 }

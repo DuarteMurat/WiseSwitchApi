@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using WiseSwitchApi.Data;
 using WiseSwitchApi.Dtos;
 using WiseSwitchApi.Entities;
@@ -14,82 +15,78 @@ namespace WiseSwitchApi.Controllers
     [ApiController]
     public class ProductSeriesController : ControllerBase
     {
-        private readonly IProductSeriesRepository _productSeriesRepository;
-        private readonly ApiResponse _apiResponse;
-        private readonly IDataUnit _dataUnit;
+        private readonly ControllerHelper _helper;
 
-        public ProductSeriesController(IProductSeriesRepository productSeriesRepository,
-            IDataUnit dataUnit)
+        public ProductSeriesController(ControllerHelper helper)
         {
-            _productSeriesRepository = productSeriesRepository;
-            _apiResponse = new ApiResponse();
-            _dataUnit = dataUnit;
+            _helper = helper;
         }
 
-        // GET: api/<ProductSeriesController>
-        [HttpGet, ActionName("DisplayAllProductSeries")]
-        public async Task<IActionResult> GetAllProductSeries()
+        // -- GET --
+
+        [HttpGet, ActionName("All")]
+        [SwaggerOperation(Summary = "Gets all Product Series, ordered by Name.")]
+        public async Task<IActionResult> GetAllProductSeriesOrderByName()
         {
-            try
-            {
-                var result = await _productSeriesRepository.GetAllOrderByName();
-
-                if (result == null || !result.Any())
-                {
-                    _apiResponse.Message = "The Data returned null";
-                    _apiResponse.IsError = true;
-                }
-                _apiResponse.Result = result;
-            }
-            catch (Exception ex)
-            {
-                _apiResponse.Message = ex.Message;
-                _apiResponse.IsError = false;
-            }
-
-            return Ok(_apiResponse);
+            return await _helper.TryGet(DataOperations.GetAllProductSeriesOrderByName, null);
         }
 
-        // GET: api/<ProductsController>
-        [HttpGet, ActionName("DisplayProductSeriesById")]
-        public async Task<IActionResult> GetDisplayViewModelAsync(int id)
+
+        [HttpGet, ActionName("Combo")]
+        [SwaggerOperation(Summary = "Gets all Product Series as a Combo, ordered by Name.")]
+        public async Task<IActionResult> GetComboProductSeries()
         {
-            try
-            {
-                var result = await _dataUnit.ProductSeries.GetDisplayDtoAsync(id);
-
-                if (result == null)
-                {
-                    _apiResponse.Message = "The Data returned null";
-                    _apiResponse.IsError = true;
-                }
-                _apiResponse.Result = result;
-            }
-            catch (Exception ex)
-            {
-                _apiResponse.Message = ex.Message;
-                _apiResponse.IsError = false;
-            }
-
-            return Ok(_apiResponse);
+            return await _helper.TryGet(DataOperations.GetComboProductSeries, null);
         }
 
-        // POST api/<ProductSeriesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+
+        [HttpGet("{id}"), ActionName("Display")]
+        [SwaggerOperation(Summary = "Gets the display model.")]
+        public async Task<IActionResult> GetDisplayDto(int id)
         {
+            return await _helper.TryGet(DataOperations.GetDisplayProductSeries, id);
         }
 
-        // PUT api/<ProductSeriesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpGet("{id}"), ActionName("Exists")]
+        [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
+        public async Task<IActionResult> GetExists(int id)
         {
+            return await _helper.TryGet(DataOperations.GetExistsProductSeries, id);
         }
 
-        // DELETE api/<ProductSeriesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+        [HttpGet("{id}"), ActionName("Model")]
+        [SwaggerOperation(Summary = "Gets model as registered in the database.")]
+        public async Task<IActionResult> GetModel(int id)
         {
+            return await _helper.TryGet(DataOperations.GetModelProductSeries, id);
+        }
+
+        // -- POST --
+        [HttpPost, ActionName("Create")]
+        [SwaggerOperation(Summary = "Creates ProductSeries.")]
+        public async Task<IActionResult> Post([FromBody] ProductSeries model)
+        {
+            return await _helper.TryPost(DataOperations.CreateProductSeries, model);
+        }
+
+        // -- PUT --
+
+        [HttpPut, ActionName("Edit")]
+        [SwaggerOperation(Summary = "Updates ProductSeries.")]
+        public async Task<IActionResult> Put([FromBody] ProductSeries model)
+        {
+            return await _helper.TryPut(DataOperations.UpdateProductSeries, model);
+        }
+
+        // -- DELETE --
+
+        [HttpDelete("{id}"), ActionName("Delete")]
+        [SwaggerOperation(Summary = "Deletes ProductSeries.")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return await _helper.TryDelete(DataOperations.DeleteProductSeries, id);
         }
     }
 }

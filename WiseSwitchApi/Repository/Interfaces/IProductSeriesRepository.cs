@@ -6,8 +6,8 @@ namespace WiseSwitchApi.Repository.Interfaces
 {
     public interface IProductSeriesRepository
     {
-        Task CreateAsync(ProductSeries productSeries);
-        Task DeleteAsync(int id);
+        Task <ProductSeries>CreateAsync(ProductSeries productSeries);
+        Task <ProductSeries> DeleteAsync(int id);
         Task<bool> ExistsAsync(int id);
         Task<bool> ExistsAsync(string productSeriesName);
         IQueryable<ProductSeries> GetAllAsNoTracking();
@@ -19,7 +19,7 @@ namespace WiseSwitchApi.Repository.Interfaces
         Task<int> GetIdFromNameAsync(string name);
         Task<InputProductSeriesDto> GetInputViewModelAsync(int id);
         Task<IEnumerable<string>> GetProductSeriesNamesOfProductLineAsync(int productLineId);
-        void Update(ProductSeries productSeries);
+        ProductSeries Update(ProductSeries productSeries);
         Task<DisplayProductSeriesDto> GetDisplayDtoAsync(int id);
     }
 }

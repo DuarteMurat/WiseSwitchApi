@@ -2,23 +2,18 @@
 {
     public static class DataOperations
     {
-        // Create.
+        // -- Create --
         public const string CreateFirmwareVersion = "CreateFirmwareVersion";
         public const string CreateManufacturer = "CreateManufacturer";
         public const string CreateProductLine = "CreateProductLine";
+        public const string CreateProductSeries = "CreateProductSeries";
 
-        // Delete.
+        // -- Delete --
         public const string DeleteManufacturer = "DeleteManufacturer";
         public const string DeleteProductLine = "DeleteProductLine";
+        public const string DeleteProductSeries = "DeleteProductSeries";
 
         // -- Get --
-
-        // ProductLine.
-        public const string GetAllProductLinesOrderByName = "AllProductLinesOrderByName";
-        public const string GetComboProductLines = "ComboProductLines";
-        public const string GetDisplayProductLine = "DisplayProductLine";
-        public const string GetExistsProductLine = "ExistsProductLine";
-        public const string GetModelProductLine = "ModelProductLine";
         // Manufacturer.
         public const string GetAllManufacturersOrderByName = "AllManufacturersOrderByName";
         public const string GetComboManufacturers = "ComboManufacturers";
@@ -26,8 +21,24 @@
         public const string GetExistsManufacturer = "ExistsManufacturer";
         public const string GetModelManufacturer = "ModelManufacturer";
 
-        // Update.
+        // ProductLine.
+        public const string GetAllProductLinesOrderByName = "AllProductLinesOrderByName";
+        public const string GetComboProductLines = "ComboProductLines";
+        public const string GetDisplayProductLine = "DisplayProductLine";
+        public const string GetExistsProductLine = "ExistsProductLine";
+        public const string GetModelProductLine = "ModelProductLine";
+
+        // ProductSeries.
+        public const string GetAllProductSeriesOrderByName = "AllProductSeriesOrderByName";
+        public const string GetComboProductSeries = "ComboProductSeries";
+        public const string GetDisplayProductSeries = "DisplayProductSeries";
+        public const string GetExistsProductSeries = "ExistsProductSeries";
+        public const string GetModelProductSeries = "ModelProductSeries";
+
+
+        // -- Update --
         public const string UpdateManufacturer = "UpdateManufacturer";
         public const string UpdateProductLine = "UpdateProductLine";
+        public const string UpdateProductSeries = "UpdateProductSeries";
     }
 }
