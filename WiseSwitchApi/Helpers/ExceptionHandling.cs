@@ -13,6 +13,11 @@ namespace WiseSwitchApi.Helpers
                 {
                     return "This object already exists.";
                 }
+
+                if (innerEx.Message.Contains("FK_"))
+                {
+                    return "This object won't be deleted because there are dependent objects.";
+                }
             }
 
             return null;
