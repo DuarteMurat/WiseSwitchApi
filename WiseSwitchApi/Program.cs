@@ -5,10 +5,12 @@ using WiseSwitchApi.Repository.Interfaces;
 using WiseSwitchApi.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using WiseSwitchApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// -- Add services to the container --
+
 builder.Services.AddDbContext<DataContext>(cfg =>
 {
     cfg.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb"));
@@ -39,7 +41,11 @@ builder.Services.AddScoped<IProductSeriesRepository, ProductSeriesRepository>();
 builder.Services.AddScoped<ISwitchModelRepository, SwitchModelRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddScoped<ControllerHelper>();
+builder.Services.AddScoped<DataHelper>();
+
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -47,7 +53,9 @@ builder.Services.AddSwaggerGen(c =>
     c.EnableAnnotations();
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 });
+
 var app = builder.Build();
+
 await InitDatabase(app);
 async Task InitDatabase(IHost host)
 {
@@ -59,6 +67,7 @@ async Task InitDatabase(IHost host)
 
     await initDb.SeedAsync();
 }
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

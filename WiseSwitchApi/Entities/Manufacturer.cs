@@ -12,6 +12,6 @@ namespace WiseSwitchApi.Entities
         public string Name { get; set; }
 
 
-        public IEnumerable<Brand> Brands { get; set; }
+        public IEnumerable<Brand>? Brands { get; set; }
     }
 }

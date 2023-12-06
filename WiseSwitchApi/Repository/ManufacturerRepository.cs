@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WiseSwitchApi.Data;
+using WiseSwitchApi.Dtos.Manufacturer;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Repository.Interfaces;
 
@@ -16,15 +17,14 @@ namespace WiseSwitchApi.Repository
         }
 
 
-
-        public async Task CreateAsync(Manufacturer manufacturer)
+        public async Task<Manufacturer> CreateAsync(Manufacturer manufacturer)
         {
-            await _manufacturerDbSet.AddAsync(manufacturer);
+            return (await _manufacturerDbSet.AddAsync(manufacturer)).Entity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<Manufacturer> DeleteAsync(int id)
         {
-            _manufacturerDbSet.Remove(await _manufacturerDbSet.FindAsync(id));
+            return _manufacturerDbSet.Remove(await _manufacturerDbSet.FindAsync(id)).Entity;
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -69,6 +69,19 @@ namespace WiseSwitchApi.Repository
                 .ToListAsync();
         }
 
+        public async Task<DisplayManufacturerDto> GetDisplayDtoAsync(int id)
+        {
+            return await _manufacturerDbSet
+                .Where(manufacturer => manufacturer.Id == id)
+                .Select(manufacturer => new DisplayManufacturerDto
+                {
+                    Id = manufacturer.Id,
+                    Name = manufacturer.Name,
+                    BrandsNames = manufacturer.Brands.Select(brand => brand.Name)
+                })
+                .SingleOrDefaultAsync();
+        }
+
         public async Task<int> GetIdFromNameAsync(string name)
         {
             return await _manufacturerDbSet
@@ -77,9 +90,9 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public void Update(Manufacturer manufacturer)
+        public Manufacturer Update(Manufacturer manufacturer)
         {
-            _manufacturerDbSet.Update(manufacturer);
+            return _manufacturerDbSet.Update(manufacturer).Entity;
         }
     }
 }
