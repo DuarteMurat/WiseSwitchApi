@@ -15,5 +15,7 @@ namespace WiseSwitchApi.Entities
         public int ProductLineId { get; set; }
 
         public ProductLine ProductLine { get; set; }
+
+        public IEnumerable<SwitchModel>? SwitchModel { get; set; }
     }
 }
