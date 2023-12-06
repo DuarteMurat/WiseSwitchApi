@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WiseSwitchApi.Data;
 using WiseSwitchApi.Dtos;
+using WiseSwitchApi.Dtos.ProductLine;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Repository.Interfaces;
 

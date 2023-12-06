@@ -42,6 +42,11 @@ namespace WiseSwitchApi.Helpers
                 case DataOperations.GetDisplayProductSeries: return await _dataUnit.ProductSeries.GetDisplayDtoAsync((int)value);
                 case DataOperations.GetExistsProductSeries: return await _dataUnit.ProductSeries.ExistsAsync((int)value);
                 case DataOperations.GetModelProductSeries: return await _dataUnit.ProductSeries.GetAsNoTrackingByIdAsync((int)value);
+                // Switch Model.
+                case DataOperations.GetAllSwitchModelsOrderByName: return await _dataUnit.SwitchModels.GetAllOrderByModelNameAsync();
+                case DataOperations.GetComboSwitchModels: return await _dataUnit.SwitchModels.GetComboSwitchModelsAsync();
+                case DataOperations.GetDisplaySwitchModel: return await _dataUnit.SwitchModels.GetDisplayDtoAsync((int)value);
+                case DataOperations.GetExistsSwitchModel: return await _dataUnit.SwitchModels.ExistsAsync((int)value);
 
                 default: throw new InvalidOperationException(dataOperation);
             };
@@ -57,6 +62,7 @@ namespace WiseSwitchApi.Helpers
                 DataOperations.CreateManufacturer => await _dataUnit.Manufacturers.CreateAsync(value as Manufacturer),
                 DataOperations.CreateProductLine => await _dataUnit.ProductLines.CreateAsync(value as ProductLine),
                 DataOperations.CreateProductSeries => await _dataUnit.ProductSeries.CreateAsync(value as ProductSeries),
+                DataOperations.CreateSwitchModel => await _dataUnit.SwitchModels.CreateAsync(value as SwitchModel),
 
                 _ => throw new InvalidOperationException(dataOperation)
             };
@@ -78,7 +84,8 @@ namespace WiseSwitchApi.Helpers
                 DataOperations.UpdateManufacturer => _dataUnit.Manufacturers.Update(value as Manufacturer),
                 DataOperations.UpdateProductLine => _dataUnit.ProductLines.Update(value as ProductLine),
                 DataOperations.UpdateProductSeries => _dataUnit.ProductSeries.Update(value as ProductSeries),
-                
+                DataOperations.UpdateSwitchModel => _dataUnit.SwitchModels.Update(value as SwitchModel),
+
                 _ => throw new InvalidOperationException(dataOperation)
             };
 
@@ -99,7 +106,8 @@ namespace WiseSwitchApi.Helpers
                 DataOperations.DeleteManufacturer => await _dataUnit.Manufacturers.DeleteAsync((int)value),
                 DataOperations.DeleteProductLine => await _dataUnit.ProductLines.DeleteAsync((int)value),
                 DataOperations.DeleteProductSeries => await _dataUnit.ProductSeries.DeleteAsync((int)value),
-                
+                DataOperations.DeleteSwitchModel => await _dataUnit.SwitchModels.DeleteAsync((int)value),
+
                 _ => throw new InvalidOperationException(dataOperation)
             };
 

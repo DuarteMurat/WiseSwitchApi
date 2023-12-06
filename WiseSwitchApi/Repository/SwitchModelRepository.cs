@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using WiseSwitchApi.Data;
 using WiseSwitchApi.Dtos;
+using WiseSwitchApi.Dtos.ProductSeries;
+using WiseSwitchApi.Dtos.SwitchModel;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Repository.Interfaces;
 
@@ -16,14 +19,14 @@ namespace WiseSwitchApi.Repository
         }
 
 
-        public async Task CreateAsync(SwitchModel switchModel)
+        public async Task<SwitchModel> CreateAsync(SwitchModel switchModel)
         {
-            await _switchModelDbSet.AddAsync(switchModel);
+            return (await _switchModelDbSet.AddAsync(switchModel)).Entity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<SwitchModel> DeleteAsync(int id)
         {
-            _switchModelDbSet.Remove(await _switchModelDbSet.FindAsync(id));
+            return _switchModelDbSet.Remove(await _switchModelDbSet.FindAsync(id)).Entity;
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -81,10 +84,34 @@ namespace WiseSwitchApi.Repository
                 .Select(switchModel => switchModel.ModelName)
                 .ToListAsync();
         }
-
-        public void Update(SwitchModel switchModel)
+        public async Task<IEnumerable<SelectListItem>> GetComboSwitchModelsAsync()
         {
-            _switchModelDbSet.Update(switchModel);
+            return await _switchModelDbSet
+                .Select(SwitchModel => new SelectListItem
+                {
+                    Text = SwitchModel.ModelName,
+                    Value = SwitchModel.Id.ToString()
+                })
+                .ToListAsync();
+        }
+
+        public async Task<DisplaySwitchModelDto> GetDisplayDtoAsync(int id)
+        {
+            return await _switchModelDbSet
+                .Where(switchModel => switchModel.Id == id)
+                .Select(switchModel => new DisplaySwitchModelDto
+                {
+                    Id = switchModel.Id,
+                    Name = switchModel.ModelName,
+                    ProductSeriesName = switchModel.ProductSeries.Name,
+                    FirmwareVersionName = switchModel.DefaultFirmwareVersion.Version,
+                })
+                .SingleOrDefaultAsync();
+        }
+
+        public SwitchModel Update(SwitchModel switchModel)
+        {
+            return _switchModelDbSet.Update(switchModel).Entity;
         }
     }
 }

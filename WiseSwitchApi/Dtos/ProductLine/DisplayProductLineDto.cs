@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace WiseSwitchApi.Dtos
+namespace WiseSwitchApi.Dtos.ProductLine
 {
     public class DisplayProductLineDto
     {
