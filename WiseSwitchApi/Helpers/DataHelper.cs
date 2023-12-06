@@ -18,6 +18,12 @@ namespace WiseSwitchApi.Helpers
         {
             switch (dataOperation)
             {
+                // FirmwareVersion.
+                case DataOperations.GetAllFirmwareVersionsOrderByVersion: return await _dataUnit.FirmwareVersions.GetAllOrderByVersionAsync();
+                case DataOperations.GetComboFirmwareVersions: return await _dataUnit.FirmwareVersions.GetComboFirmwareVersionsAsync();
+                case DataOperations.GetDisplayFirmwareVersion: return await _dataUnit.FirmwareVersions.GetDisplayDtoAsync((int)value);
+                case DataOperations.GetExistsFirmwareVersion: return await _dataUnit.FirmwareVersions.ExistsAsync((int)value);
+                case DataOperations.GetModelFirmwareVersion: return await _dataUnit.FirmwareVersions.GetAsNoTrackingByIdAsync((int)value);
                 // Manufacturer.
                 case DataOperations.GetAllManufacturersOrderByName: return await _dataUnit.Manufacturers.GetAllOrderByName();
                 case DataOperations.GetComboManufacturers: return await _dataUnit.Manufacturers.GetComboManufacturersAsync();
@@ -47,6 +53,7 @@ namespace WiseSwitchApi.Helpers
         {
             IEntity posted = dataOperation switch
             {
+                DataOperations.CreateFirmwareVersion => await _dataUnit.FirmwareVersions.CreateAsync(value as FirmwareVersion),
                 DataOperations.CreateManufacturer => await _dataUnit.Manufacturers.CreateAsync(value as Manufacturer),
                 DataOperations.CreateProductLine => await _dataUnit.ProductLines.CreateAsync(value as ProductLine),
                 DataOperations.CreateProductSeries => await _dataUnit.ProductSeries.CreateAsync(value as ProductSeries),
@@ -67,9 +74,11 @@ namespace WiseSwitchApi.Helpers
         {
             IEntity putted = dataOperation switch
             {
+                DataOperations.UpdateFirmwareVersion => _dataUnit.FirmwareVersions.Update(value as FirmwareVersion),
                 DataOperations.UpdateManufacturer => _dataUnit.Manufacturers.Update(value as Manufacturer),
                 DataOperations.UpdateProductLine => _dataUnit.ProductLines.Update(value as ProductLine),
                 DataOperations.UpdateProductSeries => _dataUnit.ProductSeries.Update(value as ProductSeries),
+                
                 _ => throw new InvalidOperationException(dataOperation)
             };
 
@@ -86,9 +95,11 @@ namespace WiseSwitchApi.Helpers
         {
             IEntity deleted = dataOperation switch
             {
+                DataOperations.DeleteFirmwareVersion => await _dataUnit.FirmwareVersions.DeleteAsync((int)value),
                 DataOperations.DeleteManufacturer => await _dataUnit.Manufacturers.DeleteAsync((int)value),
                 DataOperations.DeleteProductLine => await _dataUnit.ProductLines.DeleteAsync((int)value),
                 DataOperations.DeleteProductSeries => await _dataUnit.ProductSeries.DeleteAsync((int)value),
+                
                 _ => throw new InvalidOperationException(dataOperation)
             };
 

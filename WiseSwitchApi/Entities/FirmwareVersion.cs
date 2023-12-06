@@ -10,5 +10,8 @@ namespace WiseSwitchApi.Entities
         public string Version { get; set; }
 
         public DateTime? LaunchDate { get; set; }
+
+
+        public IEnumerable<SwitchModel>? SwitchModels { get; set; }
     }
 }

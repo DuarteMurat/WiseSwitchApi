@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WiseSwitchApi.Data;
+using WiseSwitchApi.Dtos.FirmwareVersion;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Repository.Interfaces;
 
@@ -16,14 +17,14 @@ namespace WiseSwitchApi.Repository
         }
 
 
-        public async Task CreateAsync(FirmwareVersion firmwareVersion)
+        public async Task<FirmwareVersion> CreateAsync(FirmwareVersion firmwareVersion)
         {
-            await _firmwareVersionDbSet.AddAsync(firmwareVersion);
+            return (await _firmwareVersionDbSet.AddAsync(firmwareVersion)).Entity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<FirmwareVersion> DeleteAsync(int id)
         {
-            _firmwareVersionDbSet.Remove(await _firmwareVersionDbSet.FindAsync(id));
+            return _firmwareVersionDbSet.Remove(await _firmwareVersionDbSet.FindAsync(id)).Entity;
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -60,6 +61,19 @@ namespace WiseSwitchApi.Repository
                 .ToListAsync();
         }
 
+        public async Task<DisplayFirmwareVersionDto> GetDisplayDtoAsync(int id)
+        {
+            return await _firmwareVersionDbSet
+                .Where(firmwareVersion => firmwareVersion.Id == id)
+                .Select(firmwareVersion => new DisplayFirmwareVersionDto
+                {
+                    Id = firmwareVersion.Id,
+                    Version = firmwareVersion.Version,
+                    SwitchModelsNames = firmwareVersion.SwitchModels.Select(switchModel => switchModel.ModelName)
+                })
+                .SingleOrDefaultAsync();
+        }
+
         public async Task<int> GetIdFromVersionAsync(string version)
         {
             return await _firmwareVersionDbSet
@@ -68,9 +82,9 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public void Update(FirmwareVersion firmwareVersion)
+        public FirmwareVersion Update(FirmwareVersion firmwareVersion)
         {
-            _firmwareVersionDbSet.Update(firmwareVersion);
+            return _firmwareVersionDbSet.Update(firmwareVersion).Entity;
         }
     }
 }
