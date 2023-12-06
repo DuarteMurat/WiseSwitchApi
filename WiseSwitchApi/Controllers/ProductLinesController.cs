@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WiseSwitchApi.Data;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Helpers;
-using WiseSwitchApi.Repository.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

@@ -7,12 +7,14 @@
         public const string CreateManufacturer = "CreateManufacturer";
         public const string CreateProductLine = "CreateProductLine";
         public const string CreateProductSeries = "CreateProductSeries";
+        public const string CreateSwitchModel = "CreateSwitchModel";
 
         // -- Delete --
         public const string DeleteFirmwareVersion = "DeleteFirmwareVersion";
         public const string DeleteManufacturer = "DeleteManufacturer";
         public const string DeleteProductLine = "DeleteProductLine";
         public const string DeleteProductSeries = "DeleteProductSeries";
+        public const string DeleteSwitchModel = "DeleteSwitchModel";
 
         // -- Get --
         // FirmwareVersion.
@@ -39,6 +41,12 @@
         public const string GetDisplayProductSeries = "DisplayProductSeries";
         public const string GetExistsProductSeries = "ExistsProductSeries";
         public const string GetModelProductSeries = "ModelProductSeries";
+        // SwitchModel.
+        public const string GetAllSwitchModelsOrderByName = "AllSwitchModelOrderByName";
+        public const string GetComboSwitchModels = "ComboSwitchModel";
+        public const string GetDisplaySwitchModel = "DisplaySwitchModel";
+        public const string GetExistsSwitchModel = "ExistsSwitchModel";
+        public const string GetModelSwitchModel = "ModelSwitchModel";
 
 
         // -- Update --
@@ -46,5 +54,6 @@
         public const string UpdateManufacturer = "UpdateManufacturer";
         public const string UpdateProductLine = "UpdateProductLine";
         public const string UpdateProductSeries = "UpdateProductSeries";
+        public const string UpdateSwitchModel = "UpdateSwitchModel";
     }
 }

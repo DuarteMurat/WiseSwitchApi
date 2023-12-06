@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using WiseSwitchApi.Dtos;
+using WiseSwitchApi.Dtos.ProductSeries;
 using WiseSwitchApi.Entities;
 
 namespace WiseSwitchApi.Repository.Interfaces
