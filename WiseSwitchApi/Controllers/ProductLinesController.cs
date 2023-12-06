@@ -24,7 +24,7 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/<ProductLinesController>
-        [HttpGet]
+        [HttpGet, ActionName("DisplayAllProductLine")]
         public async Task<IActionResult> GetAllProductLines()
         {
             try
@@ -48,7 +48,7 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/<ProductsController>/2
-        [HttpGet, ActionName("DisplayProductLine")]
+        [HttpGet, ActionName("DisplayProductLineById")]
         public async Task<IActionResult> GetDisplayViewModelAsync(int id)
         {
             try

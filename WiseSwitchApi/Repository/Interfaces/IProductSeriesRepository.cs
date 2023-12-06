@@ -20,5 +20,6 @@ namespace WiseSwitchApi.Repository.Interfaces
         Task<InputProductSeriesDto> GetInputViewModelAsync(int id);
         Task<IEnumerable<string>> GetProductSeriesNamesOfProductLineAsync(int productLineId);
         void Update(ProductSeries productSeries);
+        Task<DisplayProductSeriesDto> GetDisplayDtoAsync(int id);
     }
 }
