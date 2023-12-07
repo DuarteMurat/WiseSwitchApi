@@ -25,7 +25,6 @@
         public const string GetDisplayBrand = "DisplayBrand";
         public const string GetExistsBrand = "ExistsBrand";
         public const string GetModelBrand = "ModelBrand";
-        public const string GetIdFromName = "IdFromName";
         // FirmwareVersion.
         public const string GetAllFirmwareVersionsOrderByVersion = "AllFirmwareVersionsOrderByVersion";
         public const string GetComboFirmwareVersions = "ComboFirmwareVersions";
