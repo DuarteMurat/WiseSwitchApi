@@ -11,15 +11,11 @@ namespace WiseSwitchApi.Controllers
     [ApiController]
     public class BrandsController : ControllerBase
     {
-        private readonly ApiResponse _apiResponse;
-        private readonly IBrandRepository _brandRepository;
-        private readonly IDataUnit _dataUnit;
+        private readonly ControllerHelper _helper;
 
-        public BrandsController(IBrandRepository brandRepository, IDataUnit dataUnit)
+        public BrandsController(ControllerHelper helper)
         {
-            _brandRepository = brandRepository;
-            _apiResponse = new ApiResponse();
-            _dataUnit = dataUnit;
+            _helper = helper;
         }
 
 
@@ -30,24 +26,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets all Brands, ordered by Name.")]
         public async Task<IActionResult> GetAll()
         {
-            try
-            {
-                var result = await _brandRepository.GetAllOrderByNameAsync();
-
-                if (result == null || !result.Any())
-                {
-                    _apiResponse.Message = "The Data returned null";
-                    _apiResponse.IsError = true;
-                }
-                _apiResponse.Result = result;
-            }
-            catch (Exception ex)
-            {
-                _apiResponse.Message = ex.Message;
-                _apiResponse.IsError = false;
-            }
-
-            return Ok(_apiResponse);
+            return await _helper.TryGet(DataOperations.GetAllBrandsOrderByName, null);
         }
 
         // GET: api/Brands/Combo
@@ -55,33 +34,15 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets all Brands as a Combo, ordered by Name.")]
         public async Task<IActionResult> GetCombo()
         {
-            // TODO: do it.
-            return NotFound();
+            return await _helper.TryGet(DataOperations.GetComboBrands,null);
         }
 
         // GET: api/Brands/Display/{id}
         [HttpGet("{id}"), ActionName("Display")]
         [SwaggerOperation(Summary = "Gets the display model.")]
-        public async Task<IActionResult> GetDisplayViewModelAsync(int id)
+        public async Task<IActionResult> GetDisplayDto(int id)
         {
-            try
-            {
-                var result = await _dataUnit.Brands.GetDisplayDtoAsync(id);
-
-                if (result == null)
-                {
-                    _apiResponse.Message = "The Data returned null";
-                    _apiResponse.IsError = true;
-                }
-                _apiResponse.Result = result;
-            }
-            catch (Exception ex)
-            {
-                _apiResponse.Message = ex.Message;
-                _apiResponse.IsError = false;
-            }
-
-            return Ok(_apiResponse);
+            return await _helper.TryGet(DataOperations.GetDisplayBrand, id);
         }
 
         // GET: api/Brands/Exists/{id}
@@ -89,8 +50,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
-            // TODO: do it.
-            return NotFound();
+            return await _helper.TryGet(DataOperations.GetExistsBrand, id);
         }
 
         // GET: api/Brands/Model/{id}
@@ -98,10 +58,16 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
-            // TODO: do it.
-            return NotFound();
-        }
+            return await _helper.TryGet(DataOperations.GetModelBrand, id);
+        } 
 
+        // GET: api/Brands/Model/{id}
+        [HttpPost, ActionName("Model")]
+        [SwaggerOperation(Summary = "Gets an id from name.")]
+        public async Task<IActionResult> GetIdFromName(string name)
+        {
+            return await _helper.TryGet(DataOperations.GetIdFromName, name);
+        }
 
         // -- POST --
 
@@ -110,8 +76,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Creates Brand.")]
         public async Task<IActionResult> Post([FromBody] Brand model)
         {
-            // TODO: do it.
-            return NotFound();
+            return await _helper.TryPost(DataOperations.CreateBrand, model);
         }
 
 
@@ -122,8 +87,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Updates Brand.")]
         public async Task<IActionResult> Put([FromBody] Brand model)
         {
-            // TODO: do it.
-            return NotFound();
+            return await _helper.TryPut(DataOperations.UpdateBrand, model);
         }
 
         
@@ -134,8 +98,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Deletes Brand.")]
         public async Task<IActionResult> Delete(int id)
         {
-            // TODO: do it.
-            return NotFound();
+            return await _helper.TryDelete(DataOperations.DeleteBrand, id);
         }
     }
 }

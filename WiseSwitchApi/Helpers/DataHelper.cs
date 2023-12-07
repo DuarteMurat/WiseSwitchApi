@@ -18,6 +18,13 @@ namespace WiseSwitchApi.Helpers
         {
             return dataOperation switch
             {
+                // Brand.
+                DataOperations.GetAllBrandsOrderByName => await _dataUnit.Brands.GetAllOrderByNameAsync(),
+                DataOperations.GetComboBrands => await _dataUnit.Brands.GetComboBrandsAsync(),
+                DataOperations.GetDisplayBrand => await _dataUnit.Brands.GetDisplayDtoAsync((int)value),
+                DataOperations.GetExistsBrand => await _dataUnit.Brands.ExistsAsync((int)value),
+                DataOperations.GetModelBrand => await _dataUnit.Brands.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetIdFromName => await _dataUnit.Brands.GetIdFromNameAsync((string)value),
                 // Firmware Version.
                 DataOperations.GetAllFirmwareVersionsOrderByVersion => await _dataUnit.FirmwareVersions.GetAllOrderByVersionAsync(),
                 DataOperations.GetComboFirmwareVersions => await _dataUnit.FirmwareVersions.GetComboFirmwareVersionsAsync(),
