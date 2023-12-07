@@ -61,14 +61,6 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetModelBrand, id);
         } 
 
-        // GET: api/Brands/Model/{id}
-        [HttpPost, ActionName("Model")]
-        [SwaggerOperation(Summary = "Gets an id from name.")]
-        public async Task<IActionResult> GetIdFromName(string name)
-        {
-            return await _helper.TryGet(DataOperations.GetIdFromName, name);
-        }
-
         // -- POST --
 
         // POST: api/Brands/Create
