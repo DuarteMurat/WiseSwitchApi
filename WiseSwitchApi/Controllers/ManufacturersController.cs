@@ -3,8 +3,6 @@ using Swashbuckle.AspNetCore.Annotations;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Helpers;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WiseSwitchApi.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -75,8 +73,8 @@ namespace WiseSwitchApi.Controllers
 
         // -- PUT --
 
-        // PUT: api/Manufacturers/Edit
-        [HttpPut, ActionName("Edit")]
+        // PUT: api/Manufacturers/Update
+        [HttpPut, ActionName("Update")]
         [SwaggerOperation(Summary = "Updates Manufacturer.")]
         public async Task<IActionResult> Put([FromBody] Manufacturer model)
         {

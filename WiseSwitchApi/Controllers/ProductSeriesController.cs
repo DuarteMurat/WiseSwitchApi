@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WiseSwitchApi.Data;
-using WiseSwitchApi.Dtos;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Helpers;
-using WiseSwitchApi.Repository;
-using WiseSwitchApi.Repository.Interfaces;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WiseSwitchApi.Controllers
 {
@@ -22,8 +16,10 @@ namespace WiseSwitchApi.Controllers
             _helper = helper;
         }
 
+
         // -- GET --
 
+        // GET: api/ProductSeries/All
         [HttpGet, ActionName("All")]
         [SwaggerOperation(Summary = "Gets all Product Series, ordered by Name.")]
         public async Task<IActionResult> GetAllProductSeriesOrderByName()
@@ -31,7 +27,7 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetAllProductSeriesOrderByName, null);
         }
 
-
+        // GET: api/ProductSeries/Combo
         [HttpGet, ActionName("Combo")]
         [SwaggerOperation(Summary = "Gets all Product Series as a Combo, ordered by Name.")]
         public async Task<IActionResult> GetComboProductSeries()
@@ -39,7 +35,7 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetComboProductSeries, null);
         }
 
-
+        // GET: api/ProductSeries/Display/{id}
         [HttpGet("{id}"), ActionName("Display")]
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayDto(int id)
@@ -47,7 +43,7 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetDisplayProductSeries, id);
         }
 
-
+        // GET: api/ProductSeries/Exists/{id}
         [HttpGet("{id}"), ActionName("Exists")]
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
@@ -55,7 +51,7 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetExistsProductSeries, id);
         }
 
-
+        // GET: api/ProductSeries/Model/{id}
         [HttpGet("{id}"), ActionName("Model")]
         [SwaggerOperation(Summary = "Gets model as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
@@ -63,27 +59,34 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetModelProductSeries, id);
         }
 
+
         // -- POST --
+
+        // POST: api/ProductSeries/Create
         [HttpPost, ActionName("Create")]
-        [SwaggerOperation(Summary = "Creates ProductSeries.")]
+        [SwaggerOperation(Summary = "Creates Product Series.")]
         public async Task<IActionResult> Post([FromBody] ProductSeries model)
         {
             return await _helper.TryPost(DataOperations.CreateProductSeries, model);
         }
 
+
         // -- PUT --
 
-        [HttpPut, ActionName("Edit")]
-        [SwaggerOperation(Summary = "Updates ProductSeries.")]
+        // PUT: api/ProductSeries/Update
+        [HttpPut, ActionName("Update")]
+        [SwaggerOperation(Summary = "Updates Product Series.")]
         public async Task<IActionResult> Put([FromBody] ProductSeries model)
         {
             return await _helper.TryPut(DataOperations.UpdateProductSeries, model);
         }
 
+
         // -- DELETE --
 
+        // DELETE: api/ProductSeries/Delete/{id}
         [HttpDelete("{id}"), ActionName("Delete")]
-        [SwaggerOperation(Summary = "Deletes ProductSeries.")]
+        [SwaggerOperation(Summary = "Deletes Product Series.")]
         public async Task<IActionResult> Delete(int id)
         {
             return await _helper.TryDelete(DataOperations.DeleteProductSeries, id);

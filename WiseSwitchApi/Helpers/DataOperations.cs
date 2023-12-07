@@ -42,7 +42,7 @@
         public const string GetExistsProductSeries = "ExistsProductSeries";
         public const string GetModelProductSeries = "ModelProductSeries";
         // SwitchModel.
-        public const string GetAllSwitchModelsOrderByName = "AllSwitchModelOrderByName";
+        public const string GetAllSwitchModelsOrderByModelName = "AllSwitchModelOrderByName";
         public const string GetComboSwitchModels = "ComboSwitchModel";
         public const string GetDisplaySwitchModel = "DisplaySwitchModel";
         public const string GetExistsSwitchModel = "ExistsSwitchModel";

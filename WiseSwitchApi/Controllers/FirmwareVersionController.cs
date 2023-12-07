@@ -3,8 +3,6 @@ using Swashbuckle.AspNetCore.Annotations;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Helpers;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WiseSwitchApi.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -31,7 +29,7 @@ namespace WiseSwitchApi.Controllers
 
         // GET: api/FirmwareVersions/Combo
         [HttpGet, ActionName("Combo")]
-        [SwaggerOperation(Summary = "Gets all FirmwareVersions as a Combo, ordered by Version.")]
+        [SwaggerOperation(Summary = "Gets all Firmware Versions as a Combo, ordered by Version.")]
         public async Task<IActionResult> GetComboFirmwareVersions()
         {
             return await _helper.TryGet(DataOperations.GetComboFirmwareVersions, null);
@@ -72,7 +70,10 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryPost(DataOperations.CreateFirmwareVersion, model);
         }
 
-        // PUT api/FirmwareVersions/5
+
+        // -- PUT --
+
+        // PUT api/FirmwareVersions/Update
         [HttpPut, ActionName("Update")]
         [SwaggerOperation(Summary = "Updates Firmware Version.")]
         public async Task<IActionResult> Put([FromBody] FirmwareVersion model)
@@ -80,7 +81,10 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryPut(DataOperations.UpdateFirmwareVersion, model);
         }
 
-        // DELETE api/FirmwareVersions/5
+
+        // -- DELETE --
+
+        // DELETE api/FirmwareVersions/Delete/{id}
         [HttpDelete("{id}"), ActionName("Delete")]
         [SwaggerOperation(Summary = "Deletes Firmware Version.")]
         public async Task<IActionResult> Delete(int id)
