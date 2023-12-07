@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System.ComponentModel;
 using WiseSwitchApi.Data;
+using WiseSwitchApi.Entities;
 using WiseSwitchApi.Helpers;
 using WiseSwitchApi.Repository.Interfaces;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WiseSwitchApi.Controllers
 {
@@ -13,9 +11,10 @@ namespace WiseSwitchApi.Controllers
     [ApiController]
     public class BrandsController : ControllerBase
     {
-        private readonly IBrandRepository _brandRepository;
         private readonly ApiResponse _apiResponse;
+        private readonly IBrandRepository _brandRepository;
         private readonly IDataUnit _dataUnit;
+
         public BrandsController(IBrandRepository brandRepository, IDataUnit dataUnit)
         {
             _brandRepository = brandRepository;
@@ -23,10 +22,13 @@ namespace WiseSwitchApi.Controllers
             _dataUnit = dataUnit;
         }
 
-        // GET: api/<BrandsController>
+
+        // -- GET --
+
+        // GET: api/Brands/All
         [HttpGet, ActionName("All")]
-        [SwaggerOperation(Summary = "Get all brands")]
-        public async Task<IActionResult> GetAllBrands()
+        [SwaggerOperation(Summary = "Gets all Brands, ordered by Name.")]
+        public async Task<IActionResult> GetAll()
         {
             try
             {
@@ -48,9 +50,18 @@ namespace WiseSwitchApi.Controllers
             return Ok(_apiResponse);
         }
 
-        // GET: api/<BrandsController>/2
+        // GET: api/Brands/Combo
+        [HttpPost, ActionName("Combo")]
+        [SwaggerOperation(Summary = "Gets all Brands as a Combo, ordered by Name.")]
+        public async Task<IActionResult> GetCombo()
+        {
+            // TODO: do it.
+            return NotFound();
+        }
+
+        // GET: api/Brands/Display/{id}
         [HttpGet("{id}"), ActionName("Display")]
-        [SwaggerOperation(Summary = "Get a brand by Id")]
+        [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayViewModelAsync(int id)
         {
             try
@@ -73,22 +84,58 @@ namespace WiseSwitchApi.Controllers
             return Ok(_apiResponse);
         }
 
-        // PUT api/<BrandController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // GET: api/Brands/Exists/{id}
+        [HttpPost, ActionName("Exists")]
+        [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
+        public async Task<IActionResult> GetExists(int id)
         {
+            // TODO: do it.
+            return NotFound();
         }
 
-        // POST api/<BrandsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // GET: api/Brands/Model/{id}
+        [HttpPost, ActionName("Model")]
+        [SwaggerOperation(Summary = "Gets object as registered in the database.")]
+        public async Task<IActionResult> GetModel(int id)
         {
+            // TODO: do it.
+            return NotFound();
         }
 
-        // DELETE api/<BrandsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+        // -- POST --
+
+        // POST: api/Brands/Create
+        [HttpPost, ActionName("Create")]
+        [SwaggerOperation(Summary = "Creates Brand.")]
+        public async Task<IActionResult> Post([FromBody] Brand model)
         {
+            // TODO: do it.
+            return NotFound();
+        }
+
+
+        // -- PUT --
+
+        // PUT: api/Brands/Update
+        [HttpPut, ActionName("Update")]
+        [SwaggerOperation(Summary = "Updates Brand.")]
+        public async Task<IActionResult> Put([FromBody] Brand model)
+        {
+            // TODO: do it.
+            return NotFound();
+        }
+
+        
+        // -- DELETE --
+
+        // DELETE: api/Brands/Delete/{id}
+        [HttpDelete("{id}"), ActionName("Delete")]
+        [SwaggerOperation(Summary = "Deletes Brand.")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            // TODO: do it.
+            return NotFound();
         }
     }
 }

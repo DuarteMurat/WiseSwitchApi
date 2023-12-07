@@ -53,7 +53,7 @@ namespace WiseSwitchApi.Controllers
 
         // GET: api/ProcuctLines/Model/{id}
         [HttpGet("{id}"), ActionName("Model")]
-        [SwaggerOperation(Summary = "Gets model as registered in the database.")]
+        [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetModelProductLine, id);

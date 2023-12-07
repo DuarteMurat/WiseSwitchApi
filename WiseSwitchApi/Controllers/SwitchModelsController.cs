@@ -53,7 +53,7 @@ namespace WiseSwitchApi.Controllers
 
         // GET: api/SwitchModels/Model/{id}
         [HttpGet("{id}"), ActionName("Model")]
-        [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
+        [SwaggerOperation(Summary = "Gets the object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetModelSwitchModel, id);
