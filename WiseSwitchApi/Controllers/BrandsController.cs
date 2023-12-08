@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿    using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using WiseSwitchApi.Data;
 using WiseSwitchApi.Entities;
@@ -30,7 +30,7 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/Brands/Combo
-        [HttpPost, ActionName("Combo")]
+        [HttpGet, ActionName("Combo")]
         [SwaggerOperation(Summary = "Gets all Brands as a Combo, ordered by Name.")]
         public async Task<IActionResult> GetCombo()
         {
@@ -46,7 +46,7 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/Brands/Exists/{id}
-        [HttpPost, ActionName("Exists")]
+        [HttpGet, ActionName("Exists")]
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
@@ -54,7 +54,7 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/Brands/Model/{id}
-        [HttpPost, ActionName("Model")]
+        [HttpGet, ActionName("Model")]
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
