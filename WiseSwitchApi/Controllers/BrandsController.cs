@@ -46,7 +46,7 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/Brands/Exists/{id}
-        [HttpGet, ActionName("Exists")]
+        [HttpGet("{id}"), ActionName("Exists")]
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
@@ -54,7 +54,7 @@ namespace WiseSwitchApi.Controllers
         }
 
         // GET: api/Brands/Model/{id}
-        [HttpGet, ActionName("Model")]
+        [HttpGet("{id}"), ActionName("Model")]
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {

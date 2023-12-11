@@ -17,14 +17,14 @@ namespace WiseSwitchApi.Repository
         }
 
 
-        public async Task CreateAsync(Brand brand)
+        public async Task<Brand> CreateAsync(Brand brand)
         {
-            await _brandDbSet.AddAsync(brand);
+            return (await _brandDbSet.AddAsync(brand)).Entity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<Brand> DeleteAsync(int id)
         {
-            _brandDbSet.Remove(await _brandDbSet.FindAsync(id));
+            return _brandDbSet.Remove(await _brandDbSet.FindAsync(id)).Entity;
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -96,9 +96,9 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public void Update(Brand brand)
+        public Brand Update(Brand brand)
         {
-            _brandDbSet.Update(brand);
+             return _brandDbSet.Update(brand).Entity;
         }
     }
 }

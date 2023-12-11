@@ -65,6 +65,7 @@ namespace WiseSwitchApi.Helpers
         {
             IEntity posted = dataOperation switch
             {
+                DataOperations.CreateBrand => await _dataUnit.Brands.CreateAsync(value as Brand),
                 DataOperations.CreateFirmwareVersion => await _dataUnit.FirmwareVersions.CreateAsync(value as FirmwareVersion),
                 DataOperations.CreateManufacturer => await _dataUnit.Manufacturers.CreateAsync(value as Manufacturer),
                 DataOperations.CreateProductLine => await _dataUnit.ProductLines.CreateAsync(value as ProductLine),
@@ -87,6 +88,7 @@ namespace WiseSwitchApi.Helpers
         {
             IEntity putted = dataOperation switch
             {
+                DataOperations.UpdateBrand => _dataUnit.Brands.Update(value as Brand),
                 DataOperations.UpdateFirmwareVersion => _dataUnit.FirmwareVersions.Update(value as FirmwareVersion),
                 DataOperations.UpdateManufacturer => _dataUnit.Manufacturers.Update(value as Manufacturer),
                 DataOperations.UpdateProductLine => _dataUnit.ProductLines.Update(value as ProductLine),
@@ -109,6 +111,7 @@ namespace WiseSwitchApi.Helpers
         {
             IEntity deleted = dataOperation switch
             {
+                DataOperations.DeleteBrand => await _dataUnit.Brands.DeleteAsync((int)value),    
                 DataOperations.DeleteFirmwareVersion => await _dataUnit.FirmwareVersions.DeleteAsync((int)value),
                 DataOperations.DeleteManufacturer => await _dataUnit.Manufacturers.DeleteAsync((int)value),
                 DataOperations.DeleteProductLine => await _dataUnit.ProductLines.DeleteAsync((int)value),
