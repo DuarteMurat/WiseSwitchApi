@@ -22,6 +22,22 @@ namespace WiseSwitchApi.Repository
             return (await _firmwareVersionDbSet.AddAsync(firmwareVersion)).Entity;
         }
 
+        public async Task<FirmwareVersion> CreateFromObjectAsync(object value)
+        {
+            if (value is FirmwareVersion firmwareVersion) return await CreateAsync(firmwareVersion);
+
+            if (value is CreateFirmwareVersionDto createDto)
+            {
+                return await CreateAsync(new FirmwareVersion
+                {
+                    Version = createDto.Version,
+                    LaunchDate = createDto.LaunchDate,
+                });
+            }
+
+            throw new NotImplementedException();
+        }
+
         public async Task<FirmwareVersion> DeleteAsync(int id)
         {
             return _firmwareVersionDbSet.Remove(await _firmwareVersionDbSet.FindAsync(id)).Entity;
@@ -37,11 +53,16 @@ namespace WiseSwitchApi.Repository
             return await _firmwareVersionDbSet.AnyAsync(firmwareVersion => firmwareVersion.Version == version);
         }
 
-        public async Task<IEnumerable<FirmwareVersion>> GetAllOrderByVersionAsync()
+        public async Task<IEnumerable<IndexRowFirmwareVersionDto>> GetAllOrderByVersionAsync()
         {
             return await _firmwareVersionDbSet
-                .AsNoTracking()
                 .OrderBy(firmwareVersion => firmwareVersion.Version)
+                .Select(firmwareVersion => new IndexRowFirmwareVersionDto
+                {
+                    Id = firmwareVersion.Id,
+                    Version = firmwareVersion.Version,
+                    LaunchDate = firmwareVersion.LaunchDate,
+                })
                 .ToListAsync();
         }
 
@@ -74,6 +95,19 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<EditFirmwareVersionDto> GetEditDtoAsync(int id)
+        {
+            return await _firmwareVersionDbSet
+                .Where(firmwareVersion => firmwareVersion.Id == id)
+                .Select(firmwareVersion => new EditFirmwareVersionDto
+                {
+                    Id = firmwareVersion.Id,
+                    Version = firmwareVersion.Version,
+                    LaunchDate = firmwareVersion.LaunchDate,
+                })
+                .SingleOrDefaultAsync();
+        }
+
         public async Task<int> GetIdFromVersionAsync(string version)
         {
             return await _firmwareVersionDbSet
@@ -85,6 +119,23 @@ namespace WiseSwitchApi.Repository
         public FirmwareVersion Update(FirmwareVersion firmwareVersion)
         {
             return _firmwareVersionDbSet.Update(firmwareVersion).Entity;
+        }
+
+        public FirmwareVersion UpdateFromObject(object value)
+        {
+            if (value is FirmwareVersion firmwareVersion) return Update(firmwareVersion);
+
+            if (value is EditFirmwareVersionDto editDto)
+            {
+                return Update(new FirmwareVersion
+                {
+                    Id = editDto.Id,
+                    Version = editDto.Version,
+                    LaunchDate = editDto.LaunchDate,
+                });
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

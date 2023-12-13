@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WiseSwitchApi.Data;
-using WiseSwitchApi.Dtos;
+using WiseSwitchApi.Dtos.Brand;
 using WiseSwitchApi.Entities;
 using WiseSwitchApi.Repository.Interfaces;
 
@@ -20,6 +20,22 @@ namespace WiseSwitchApi.Repository
         public async Task<Brand> CreateAsync(Brand brand)
         {
             return (await _brandDbSet.AddAsync(brand)).Entity;
+        }
+
+        public async Task<Brand> CreateFromObjectAsync(object value)
+        {
+            if (value is Brand brand) return await CreateAsync(brand);
+
+            if (value is CreateBrandDto createDto)
+            {
+                return await CreateAsync(new Brand
+                {
+                    Name = createDto.Name,
+                    ManufacturerId = createDto.ManufacturerId,
+                });
+            }
+
+            throw new NotImplementedException();
         }
 
         public async Task<Brand> DeleteAsync(int id)
@@ -88,6 +104,19 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<EditBrandDto> GetEditDtoAsync(int id)
+        {
+            return await _brandDbSet
+                .Where(brand => brand.Id == id)
+                .Select(brand => new EditBrandDto
+                {
+                    Id = brand.Id,
+                    Name = brand.Name,
+                    ManufacturerId = brand.ManufacturerId,
+                })
+                .SingleOrDefaultAsync();
+        }
+
         public async Task<int> GetIdFromNameAsync(string name)
         {
             return await _brandDbSet
@@ -99,6 +128,23 @@ namespace WiseSwitchApi.Repository
         public Brand Update(Brand brand)
         {
              return _brandDbSet.Update(brand).Entity;
+        }
+
+        public Brand UpdateFromObject(object value)
+        {
+            if (value is Brand brand) return Update(brand);
+
+            if (value is EditBrandDto editDto)
+            {
+                return Update(new Brand
+                {
+                    Id = editDto.Id,
+                    Name = editDto.Name,
+                    ManufacturerId = editDto.ManufacturerId,
+                });
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

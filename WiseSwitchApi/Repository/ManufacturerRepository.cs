@@ -22,6 +22,21 @@ namespace WiseSwitchApi.Repository
             return (await _manufacturerDbSet.AddAsync(manufacturer)).Entity;
         }
 
+        public async Task<Manufacturer> CreateFromObjectAsync(object value)
+        {
+            if (value is Manufacturer manufacturer) return await CreateAsync(manufacturer);
+
+            if (value is CreateManufacturerDto createDto)
+            {
+                return await CreateAsync(new Manufacturer
+                {
+                    Name = createDto.Name,
+                });
+            }
+
+            throw new NotImplementedException();
+        }
+
         public async Task<Manufacturer> DeleteAsync(int id)
         {
             return _manufacturerDbSet.Remove(await _manufacturerDbSet.FindAsync(id)).Entity;
@@ -42,11 +57,15 @@ namespace WiseSwitchApi.Repository
             return _manufacturerDbSet.AsNoTracking();
         }
 
-        public async Task<IEnumerable<Manufacturer>> GetAllOrderByName()
+        public async Task<IEnumerable<IndexRowManufacturerDto>> GetAllOrderByNameAsync()
         {
             return await _manufacturerDbSet
-                .AsNoTracking()
-                .OrderBy(x => x.Name)
+                .OrderBy(manufacturer => manufacturer.Name)
+                .Select(manufacturer => new IndexRowManufacturerDto
+                {
+                    Id = manufacturer.Id,
+                    Name = manufacturer.Name,
+                })
                 .ToListAsync();
         }
 
@@ -82,6 +101,18 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<EditManufacturerDto> GetEditDtoAsync(int id)
+        {
+            return await _manufacturerDbSet
+                .Where(manufacturer => manufacturer.Id == id)
+                .Select(manufacturer => new EditManufacturerDto
+                {
+                    Id = manufacturer.Id,
+                    Name = manufacturer.Name,
+                })
+                .SingleOrDefaultAsync();
+        }
+
         public async Task<int> GetIdFromNameAsync(string name)
         {
             return await _manufacturerDbSet
@@ -93,6 +124,22 @@ namespace WiseSwitchApi.Repository
         public Manufacturer Update(Manufacturer manufacturer)
         {
             return _manufacturerDbSet.Update(manufacturer).Entity;
+        }
+
+        public Manufacturer UpdateFromObject(object value)
+        {
+            if (value is Manufacturer manufacturer) return Update(manufacturer);
+
+            if (value is EditManufacturerDto editDto)
+            {
+                return Update(new Manufacturer
+                {
+                    Id = editDto.Id,
+                    Name = editDto.Name,
+                });
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

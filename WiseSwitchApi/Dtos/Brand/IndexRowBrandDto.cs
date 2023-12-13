@@ -1,6 +1,4 @@
-﻿using WiseSwitchApi.Entities;
-
-namespace WiseSwitchApi.Dtos
+﻿namespace WiseSwitchApi.Dtos.Brand
 {
     public class IndexRowBrandDto
     {

@@ -1,9 +1,7 @@
-﻿    using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WiseSwitchApi.Data;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Dtos.Brand;
 using WiseSwitchApi.Helpers;
-using WiseSwitchApi.Repository.Interfaces;
 
 namespace WiseSwitchApi.Controllers
 {
@@ -34,15 +32,23 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets all Brands as a Combo, ordered by Name.")]
         public async Task<IActionResult> GetCombo()
         {
-            return await _helper.TryGet(DataOperations.GetComboBrands,null);
+            return await _helper.TryGet(DataOperations.GetComboBrands, null);
         }
 
         // GET: api/Brands/Display/{id}
         [HttpGet("{id}"), ActionName("Display")]
         [SwaggerOperation(Summary = "Gets the display model.")]
-        public async Task<IActionResult> GetDisplayDto(int id)
+        public async Task<IActionResult> GetDisplayModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetDisplayBrand, id);
+        }
+
+        // GET: api/Brands/EditModel/{id}
+        [HttpGet("{id}"), ActionName("EditModel")]
+        [SwaggerOperation(Summary = "Gets the edit model.")]
+        public async Task<IActionResult> GetEditModel(int id)
+        {
+            return await _helper.TryGet(DataOperations.GetEditModelBrand, id);
         }
 
         // GET: api/Brands/Exists/{id}
@@ -59,14 +65,15 @@ namespace WiseSwitchApi.Controllers
         public async Task<IActionResult> GetModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetModelBrand, id);
-        } 
+        }
+
 
         // -- POST --
 
         // POST: api/Brands/Create
         [HttpPost, ActionName("Create")]
         [SwaggerOperation(Summary = "Creates Brand.")]
-        public async Task<IActionResult> Post([FromBody] Brand model)
+        public async Task<IActionResult> Post([FromBody] CreateBrandDto model)
         {
             return await _helper.TryPost(DataOperations.CreateBrand, model);
         }
@@ -77,12 +84,12 @@ namespace WiseSwitchApi.Controllers
         // PUT: api/Brands/Update
         [HttpPut, ActionName("Update")]
         [SwaggerOperation(Summary = "Updates Brand.")]
-        public async Task<IActionResult> Put([FromBody] Brand model)
+        public async Task<IActionResult> Put([FromBody] EditBrandDto model)
         {
             return await _helper.TryPut(DataOperations.UpdateBrand, model);
         }
 
-        
+
         // -- DELETE --
 
         // DELETE: api/Brands/Delete/{id}

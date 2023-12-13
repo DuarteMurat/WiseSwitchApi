@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Dtos.ProductLine;
 using WiseSwitchApi.Helpers;
 
 namespace WiseSwitchApi.Controllers
@@ -27,6 +27,14 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetAllProductLinesOrderByName, null);
         }
 
+        // GET: api/ProcuctLines/GetBrandIdOfProductLine/{id}
+        [HttpGet("{id}"), ActionName("GetBrandIdOfProductLine")]
+        [SwaggerOperation(Summary = "Gets the Brand ID of this Product Line.")]
+        public async Task<IActionResult> GetBrandId(int id)
+        {
+            return await _helper.TryGet(DataOperations.GetBrandIdOfProductLine, id);
+        }
+
         // GET: api/ProcuctLines/Combo
         [HttpGet, ActionName("Combo")]
         [SwaggerOperation(Summary = "Gets all Product Lines as a Combo, ordered by Name.")]
@@ -38,9 +46,17 @@ namespace WiseSwitchApi.Controllers
         // GET: api/ProcuctLines/Display{id}
         [HttpGet("{id}"), ActionName("Display")]
         [SwaggerOperation(Summary = "Gets the display model.")]
-        public async Task<IActionResult> GetDisplayDto(int id)
+        public async Task<IActionResult> GetDisplayModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetDisplayProductLine, id);
+        }
+
+        // GET: api/ProductLines/EditModel/{id}
+        [HttpGet("{id}"), ActionName("EditModel")]
+        [SwaggerOperation(Summary = "Gets the edit model.")]
+        public async Task<IActionResult> GetEditModel(int id)
+        {
+            return await _helper.TryGet(DataOperations.GetEditModelProductLine, id);
         }
 
         // GET: api/ProcuctLines/Exists/{id}
@@ -65,7 +81,7 @@ namespace WiseSwitchApi.Controllers
         // POST: api/ProcuctLines/Create
         [HttpPost, ActionName("Create")]
         [SwaggerOperation(Summary = "Creates ProductLines.")]
-        public async Task<IActionResult> Post([FromBody] ProductLine model)
+        public async Task<IActionResult> Post([FromBody] CreateProductLineDto model)
         {
             return await _helper.TryPost(DataOperations.CreateProductLine, model);
         }
@@ -76,7 +92,7 @@ namespace WiseSwitchApi.Controllers
         // PUT: api/ProcuctLines/Update
         [HttpPut, ActionName("Update")]
         [SwaggerOperation(Summary = "Updates ProductLine.")]
-        public async Task<IActionResult> Put([FromBody] ProductLine model)
+        public async Task<IActionResult> Put([FromBody] EditProductLineDto model)
         {
             return await _helper.TryPut(DataOperations.UpdateProductLine, model);
         }

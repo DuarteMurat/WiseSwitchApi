@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Dtos.FirmwareVersion;
 using WiseSwitchApi.Helpers;
 
 namespace WiseSwitchApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class FirmwareVersionController : ControllerBase
+    public class FirmwareVersionsController : ControllerBase
     {
         private readonly ControllerHelper _helper;
 
-        public FirmwareVersionController(ControllerHelper helper)
+        public FirmwareVersionsController(ControllerHelper helper)
         {
             _helper = helper;
         }
@@ -38,9 +38,17 @@ namespace WiseSwitchApi.Controllers
         // GET: api/FirmwareVersions/Display/{id}
         [HttpGet("{id}"), ActionName("Display")]
         [SwaggerOperation(Summary = "Gets the display model.")]
-        public async Task<IActionResult> GetDisplayDto(int id)
+        public async Task<IActionResult> GetDisplayModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetDisplayFirmwareVersion, id);
+        }
+
+        // GET: api/FirmwareVersions/EditModel/{id}
+        [HttpGet("{id}"), ActionName("EditModel")]
+        [SwaggerOperation(Summary = "Gets the display model.")]
+        public async Task<IActionResult> GetEditModel(int id)
+        {
+            return await _helper.TryGet(DataOperations.GetEditModelFirmwareVersion, id);
         }
 
         // GET: api/FirmwareVersions/Exists/{id}
@@ -65,7 +73,7 @@ namespace WiseSwitchApi.Controllers
         // POST api/FirmwareVersions/Create
         [HttpPost, ActionName("Create")]
         [SwaggerOperation(Summary = "Creates Firmware Version.")]
-        public async Task<IActionResult> Post([FromBody] FirmwareVersion model)
+        public async Task<IActionResult> Post([FromBody] CreateFirmwareVersionDto model)
         {
             return await _helper.TryPost(DataOperations.CreateFirmwareVersion, model);
         }
@@ -76,7 +84,7 @@ namespace WiseSwitchApi.Controllers
         // PUT api/FirmwareVersions/Update
         [HttpPut, ActionName("Update")]
         [SwaggerOperation(Summary = "Updates Firmware Version.")]
-        public async Task<IActionResult> Put([FromBody] FirmwareVersion model)
+        public async Task<IActionResult> Put([FromBody] EditFirmwareVersionDto model)
         {
             return await _helper.TryPut(DataOperations.UpdateFirmwareVersion, model);
         }

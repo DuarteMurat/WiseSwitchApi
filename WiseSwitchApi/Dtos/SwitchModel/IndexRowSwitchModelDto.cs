@@ -1,4 +1,4 @@
-﻿namespace WiseSwitchApi.Dtos
+﻿namespace WiseSwitchApi.Dtos.SwitchModel
 {
     public class IndexRowSwitchModelDto
     {

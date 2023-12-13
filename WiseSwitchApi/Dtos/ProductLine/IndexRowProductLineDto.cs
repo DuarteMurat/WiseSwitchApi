@@ -1,12 +1,10 @@
-﻿namespace WiseSwitchApi.Dtos
+﻿namespace WiseSwitchApi.Dtos.ProductLine
 {
-    public class IndexRowProductSeriesDto
+    public class IndexRowProductLineDto
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public string ProductLineName { get; set; }
 
         public string BrandName { get; set; }
     }

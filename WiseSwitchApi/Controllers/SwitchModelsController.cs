@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Dtos.SwitchModel;
 using WiseSwitchApi.Helpers;
 
 namespace WiseSwitchApi.Controllers
@@ -38,9 +38,17 @@ namespace WiseSwitchApi.Controllers
         // GET: api/SwitchModels/Display/{id}
         [HttpGet("{id}"), ActionName("Display")]
         [SwaggerOperation(Summary = "Gets the display model.")]
-        public async Task<IActionResult> GetDisplayDto(int id)
+        public async Task<IActionResult> GetDisplayModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetDisplaySwitchModel, id);
+        }
+
+        // GET: api/SwitchModels/EditModel/{id}
+        [HttpGet("{id}"), ActionName("EditModel")]
+        [SwaggerOperation(Summary = "Gets the edit model.")]
+        public async Task<IActionResult> GetEditModel(int id)
+        {
+            return await _helper.TryGet(DataOperations.GetEditModelSwitchModel, id);
         }
 
         // GET: api/SwitchModels/Exists/{id}
@@ -65,7 +73,7 @@ namespace WiseSwitchApi.Controllers
         // POST: api/SwitchModels/Create
         [HttpPost, ActionName("Create")]
         [SwaggerOperation(Summary = "Creates Switch Model.")]
-        public async Task<IActionResult> Post([FromBody] SwitchModel model)
+        public async Task<IActionResult> Post([FromBody] CreateSwitchModelDto model)
         {
             return await _helper.TryPost(DataOperations.CreateSwitchModel, model);
         }
@@ -76,7 +84,7 @@ namespace WiseSwitchApi.Controllers
         // PUT: api/SwitchModels/Update
         [HttpPut, ActionName("Update")]
         [SwaggerOperation(Summary = "Updates Switch Model.")]
-        public async Task<IActionResult> Put([FromBody] SwitchModel model)
+        public async Task<IActionResult> Put([FromBody] EditSwitchModelDto model)
         {
             return await _helper.TryPut(DataOperations.UpdateSwitchModel, model);
         }

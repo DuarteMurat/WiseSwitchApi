@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Dtos.Manufacturer;
 using WiseSwitchApi.Helpers;
 
 namespace WiseSwitchApi.Controllers
@@ -18,7 +18,7 @@ namespace WiseSwitchApi.Controllers
 
 
         // -- GET --
-        
+
         // GET: api/Manufacturers/All
         [HttpGet, ActionName("All")]
         [SwaggerOperation(Summary = "Gets all Manufacturers, ordered by Name.")]
@@ -38,9 +38,17 @@ namespace WiseSwitchApi.Controllers
         // GET: api/Manufacturers/Display/{id}
         [HttpGet("{id}"), ActionName("Display")]
         [SwaggerOperation(Summary = "Gets the display model.")]
-        public async Task<IActionResult> GetDisplayDto(int id)
+        public async Task<IActionResult> GetDisplayModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetDisplayManufacturer, id);
+        }
+
+        // GET: api/Manufacturers/EditModel/{id}
+        [HttpGet("{id}"), ActionName("EditModel")]
+        [SwaggerOperation(Summary = "Gets the edit model.")]
+        public async Task<IActionResult> GetEditModel(int id)
+        {
+            return await _helper.TryGet(DataOperations.GetEditModelManufacturer, id);
         }
 
         // GET: api/Manufacturers/Exists/{id}
@@ -65,7 +73,7 @@ namespace WiseSwitchApi.Controllers
         // POST: api/Manufacturers/Create
         [HttpPost, ActionName("Create")]
         [SwaggerOperation(Summary = "Creates Manufacturer.")]
-        public async Task<IActionResult> Post([FromBody] Manufacturer model)
+        public async Task<IActionResult> Post([FromBody] CreateManufacturerDto model)
         {
             return await _helper.TryPost(DataOperations.CreateManufacturer, model);
         }
@@ -76,7 +84,7 @@ namespace WiseSwitchApi.Controllers
         // PUT: api/Manufacturers/Update
         [HttpPut, ActionName("Update")]
         [SwaggerOperation(Summary = "Updates Manufacturer.")]
-        public async Task<IActionResult> Put([FromBody] Manufacturer model)
+        public async Task<IActionResult> Put([FromBody] EditManufacturerDto model)
         {
             return await _helper.TryPut(DataOperations.UpdateManufacturer, model);
         }

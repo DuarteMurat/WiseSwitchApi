@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Dtos.ProductSeries;
 using WiseSwitchApi.Helpers;
 
 namespace WiseSwitchApi.Controllers
@@ -38,9 +38,17 @@ namespace WiseSwitchApi.Controllers
         // GET: api/ProductSeries/Display/{id}
         [HttpGet("{id}"), ActionName("Display")]
         [SwaggerOperation(Summary = "Gets the display model.")]
-        public async Task<IActionResult> GetDisplayDto(int id)
+        public async Task<IActionResult> GetDisplayModel(int id)
         {
             return await _helper.TryGet(DataOperations.GetDisplayProductSeries, id);
+        }
+
+        // GET: api/ProductSeries/EditModel/{id}
+        [HttpGet("{id}"), ActionName("EditModel")]
+        [SwaggerOperation(Summary = "Gets the edit model.")]
+        public async Task<IActionResult> GetEditModel(int id)
+        {
+            return await _helper.TryGet(DataOperations.GetEditModelProductSeries, id);
         }
 
         // GET: api/ProductSeries/Exists/{id}
@@ -65,7 +73,7 @@ namespace WiseSwitchApi.Controllers
         // POST: api/ProductSeries/Create
         [HttpPost, ActionName("Create")]
         [SwaggerOperation(Summary = "Creates Product Series.")]
-        public async Task<IActionResult> Post([FromBody] ProductSeries model)
+        public async Task<IActionResult> Post([FromBody] CreateProductSeriesDto model)
         {
             return await _helper.TryPost(DataOperations.CreateProductSeries, model);
         }
@@ -76,7 +84,7 @@ namespace WiseSwitchApi.Controllers
         // PUT: api/ProductSeries/Update
         [HttpPut, ActionName("Update")]
         [SwaggerOperation(Summary = "Updates Product Series.")]
-        public async Task<IActionResult> Put([FromBody] ProductSeries model)
+        public async Task<IActionResult> Put([FromBody] EditProductSeriesDto model)
         {
             return await _helper.TryPut(DataOperations.UpdateProductSeries, model);
         }
