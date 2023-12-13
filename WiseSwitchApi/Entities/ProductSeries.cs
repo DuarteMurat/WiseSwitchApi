@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WiseSwitchApi.Entities
 {
-    [Index(nameof(Name), IsUnique = true)]
+    [Index(nameof(ProductLineId), nameof(Name), IsUnique = true)]
     public class ProductSeries : IEntity
     {
         public int Id { get; set; }
