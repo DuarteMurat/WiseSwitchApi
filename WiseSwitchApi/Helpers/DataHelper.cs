@@ -50,6 +50,7 @@ namespace WiseSwitchApi.Helpers
                 // Product Series.
                 DataOperations.GetAllProductSeriesOrderByName => await _dataUnit.ProductSeries.GetAllOrderByNameAsync(),
                 DataOperations.GetComboProductSeries => await _dataUnit.ProductSeries.GetComboProductSeriesAsync(),
+                DataOperations.GetDependencyChainIdsOfProductSeries => await _dataUnit.ProductSeries.GetDependencyChainIdsAsync((int)value),
                 DataOperations.GetDisplayProductSeries => await _dataUnit.ProductSeries.GetDisplayDtoAsync((int)value),
                 DataOperations.GetEditModelProductSeries => await _dataUnit.ProductSeries.GetEditDtoAsync((int)value),
                 DataOperations.GetExistsProductSeries => await _dataUnit.ProductSeries.ExistsAsync((int)value),

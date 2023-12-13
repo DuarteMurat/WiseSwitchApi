@@ -59,6 +59,14 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetExistsProductSeries, id);
         }
 
+        // GET: api/ProductSeries/IdsOfDependencyChain/{id}
+        [HttpGet("{id}"), ActionName("IdsOfDependencyChain")]
+        [SwaggerOperation(Summary = "Gets the IDs of the related Product Line and Brand.")]
+        public async Task<IActionResult> GetIdsOfDependencyChain(int id)
+        {
+            return await _helper.TryGet(DataOperations.GetDependencyChainIdsOfProductSeries, id);
+        }
+
         // GET: api/ProductSeries/Model/{id}
         [HttpGet("{id}"), ActionName("Model")]
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]

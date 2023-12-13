@@ -105,6 +105,18 @@ namespace WiseSwitchApi.Repository
                 .ToListAsync();
         }
 
+        public async Task<ProductSeriesDependencyChainIds> GetDependencyChainIdsAsync(int id)
+        {
+            return await _productSeriesDbSet
+                .Where(productSeries => productSeries.Id == id)
+                .Select(productSeries => new ProductSeriesDependencyChainIds
+                {
+                    ProductLineId = productSeries.ProductLineId,
+                    BrandId = productSeries.ProductLine.BrandId,
+                })
+                .SingleOrDefaultAsync();
+        }
+
         public async Task<DisplayProductSeriesDto> GetDisplayDtoAsync(int id)
         {
             return await _productSeriesDbSet

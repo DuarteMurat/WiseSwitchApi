@@ -16,6 +16,7 @@ namespace WiseSwitchApi.Repository.Interfaces
         Task<ProductSeries> GetAsNoTrackingByIdAsync(int id);
         Task<IEnumerable<SelectListItem>> GetComboProductSeriesAsync();
         Task<IEnumerable<SelectListItem>> GetComboProductSeriesOfProductLineAsync(int productLineId);
+        Task<ProductSeriesDependencyChainIds> GetDependencyChainIdsAsync(int id);
         Task<DisplayProductSeriesDto> GetDisplayDtoAsync(int id);
         Task<EditProductSeriesDto> GetEditDtoAsync(int id);
         Task<ProductSeries> GetForUpdateAsync(int id);

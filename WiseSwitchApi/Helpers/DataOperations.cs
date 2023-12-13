@@ -52,6 +52,7 @@
         // Product Series.
         public const string GetAllProductSeriesOrderByName = "AllProductSeriesOrderByName";
         public const string GetComboProductSeries = "ComboProductSeries";
+        public const string GetDependencyChainIdsOfProductSeries = "DependencyChainIdsOfProductSeries";
         public const string GetDisplayProductSeries = "DisplayProductSeries";
         public const string GetEditModelProductSeries = "EditModelProductSeries";
         public const string GetExistsProductSeries = "ExistsProductSeries";
