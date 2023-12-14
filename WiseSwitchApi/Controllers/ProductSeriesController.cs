@@ -35,8 +35,8 @@ namespace WiseSwitchApi.Controllers
             return await _helper.TryGet(DataOperations.GetComboProductSeries, null);
         }
 
-        // GET: api/ProcuctSeries/ComboProductSeriesOfBrand/{productLineId}
-        [HttpGet("{productLineId}"), ActionName("ComboProductSeriesOfBrand")]
+        // GET: api/ProcuctSeries/ComboProductSeriesOfProductLine/{productLineId}
+        [HttpGet("{productLineId}"), ActionName("ComboProductSeriesOfProductLine")]
         [SwaggerOperation(Summary = "Gets Product Series of Product Line whose ID is the given one.")]
         public async Task<IActionResult> GetOfProductLine(int productLineId)
         {
