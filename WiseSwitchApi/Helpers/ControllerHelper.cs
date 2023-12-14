@@ -16,11 +16,11 @@ namespace WiseSwitchApi.Helpers
         {
             try
             {
-                var model = await _dataHelper.GetDataAsync(dataOperation, value);
-                if (model == null) return DataNull();
+                var data = await _dataHelper.GetDataAsync(dataOperation, value);
+                if (data == null) return DataIsNull();
 
                 // Success.
-                return Success(model);
+                return Success(data);
             }
             catch
             {
@@ -34,17 +34,17 @@ namespace WiseSwitchApi.Helpers
             try
             {
                 var model = await _dataHelper.PostDataAsync(dataOperation, value);
-                if (model == null) return DataNull();
+                if (model == null) return DataIsNull();
 
                 // Success.
                 return Success(model);
             }
             catch (Exception ex)
             {
-                // Get error message if exception is one expected.
-                var message = ExceptionHandling.GetErrorMessage(ex);
+                // Get custom error message, if exception is one expected.
+                var message = ExceptionHandling.GetCustomErrorMessage(ex);
                 
-                // If there is message, return it.
+                // If there is a custom message, return it.
                 if (message != null) return Error409Conflict(message);
 
                 // Generic error.
@@ -57,7 +57,7 @@ namespace WiseSwitchApi.Helpers
             try
             {
                 var model = await _dataHelper.PutDataAsync(dataOperation, value);
-                if (model == null) return DataNull();
+                if (model == null) return DataIsNull();
 
                 // Success.
                 return Success(model);
@@ -65,7 +65,7 @@ namespace WiseSwitchApi.Helpers
             catch (Exception ex)
             {
                 // Get error message if exception is one expected.
-                var message = ExceptionHandling.GetErrorMessage(ex);
+                var message = ExceptionHandling.GetCustomErrorMessage(ex);
 
                 // If there is message, return it.
                 if (message != null) return Error409Conflict(message);
@@ -80,20 +80,26 @@ namespace WiseSwitchApi.Helpers
             try
             {
                 var model = await _dataHelper.DeleteDataAsync(dataOperation, value);
-                if (model == null) return DataNull();
+                if (model == null) return DataIsNull();
 
                 // Success.
                 return Success(model);
             }
-            catch
+            catch (Exception ex)
             {
+                // Get error message if exception is one expected.
+                var message = ExceptionHandling.GetCustomErrorMessage(ex);
+
+                // If there is message, return it.
+                if (message != null) return Error409Conflict(message);
+
                 // Generic error.
                 return Error();
             }
         }
 
 
-        public static IActionResult DataNull()
+        public static IActionResult DataIsNull()
         {
             return new JsonResult(ApiResponse.ErrorDataReturnedNull) { StatusCode = StatusCodes.Status204NoContent };
         }

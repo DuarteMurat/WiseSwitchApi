@@ -5,18 +5,29 @@ namespace WiseSwitchApi.Helpers
 {
     public static class ExceptionHandling
     {
-        public static string GetErrorMessage(Exception ex)
+        public static string GetCustomErrorMessage(Exception ex)
         {
             if (ex is DbUpdateException && ex.InnerException is SqlException innerEx)
             {
-                if (innerEx.Message.Contains("IX_"))
+                var innerExMessage = innerEx.Message;
+
+                // Check for Index Unique violation (on Create or Update).
+                if (innerExMessage.Contains("IX_"))
                 {
                     return "This object already exists.";
                 }
 
-                if (innerEx.Message.Contains("FK_"))
+                // Check for Foreign Key violation.
+                if (innerExMessage.Contains("FK_"))
                 {
-                    return "This object won't be deleted because there are dependent objects.";
+                    // On Delete.
+                    if (innerExMessage.Contains("DELETE"))
+                    {
+                        return "This object won't be deleted because it has dependent objects.";
+                    }
+
+                    // On Create or Update.
+                    return "The other object this one is dependent on does not exist in the database.";
                 }
             }
 
