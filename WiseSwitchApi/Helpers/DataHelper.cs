@@ -47,6 +47,7 @@ namespace WiseSwitchApi.Helpers
                 DataOperations.GetEditModelProductLine => await _dataUnit.ProductLines.GetEditDtoAsync((int)value),
                 DataOperations.GetExistsProductLine => await _dataUnit.ProductLines.ExistsAsync((int)value),
                 DataOperations.GetModelProductLine => await _dataUnit.ProductLines.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetComboProductLinesOfBrand => await _dataUnit.ProductLines.GetComboProductLinesOfBrandAsync((int)value),
                 // Product Series.
                 DataOperations.GetAllProductSeriesOrderByName => await _dataUnit.ProductSeries.GetAllOrderByNameAsync(),
                 DataOperations.GetComboProductSeries => await _dataUnit.ProductSeries.GetComboProductSeriesAsync(),
@@ -55,6 +56,7 @@ namespace WiseSwitchApi.Helpers
                 DataOperations.GetEditModelProductSeries => await _dataUnit.ProductSeries.GetEditDtoAsync((int)value),
                 DataOperations.GetExistsProductSeries => await _dataUnit.ProductSeries.ExistsAsync((int)value),
                 DataOperations.GetModelProductSeries => await _dataUnit.ProductSeries.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetComboProductSeriesOfProductLine => await _dataUnit.ProductSeries.GetComboProductSeriesOfProductLineAsync((int)value),
                 // Switch Model.
                 DataOperations.GetAllSwitchModelsOrderByModelName => await _dataUnit.SwitchModels.GetAllOrderByModelNameAsync(),
                 DataOperations.GetComboSwitchModels => await _dataUnit.SwitchModels.GetComboSwitchModelsAsync(),

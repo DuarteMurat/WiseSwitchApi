@@ -49,6 +49,7 @@
         public const string GetEditModelProductLine = "EditModelProductLine";
         public const string GetExistsProductLine = "ExistsProductLine";
         public const string GetModelProductLine = "ModelProductLine";
+        public const string GetComboProductLinesOfBrand = "ComboProductLinesOfBrand";
         // Product Series.
         public const string GetAllProductSeriesOrderByName = "AllProductSeriesOrderByName";
         public const string GetComboProductSeries = "ComboProductSeries";
@@ -57,6 +58,7 @@
         public const string GetEditModelProductSeries = "EditModelProductSeries";
         public const string GetExistsProductSeries = "ExistsProductSeries";
         public const string GetModelProductSeries = "ModelProductSeries";
+        public const string GetComboProductSeriesOfProductLine = "ComboProductSeriesOfProductLine";
         // Switch Model.
         public const string GetAllSwitchModelsOrderByModelName = "AllSwitchModelOrderByName";
         public const string GetCreateModelForSwitchModel = "CreateModelForSwitchModel";
