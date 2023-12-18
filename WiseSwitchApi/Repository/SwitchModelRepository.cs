@@ -64,10 +64,10 @@ namespace WiseSwitchApi.Repository
                     Id = switchModel.Id,
                     ModelName = switchModel.ModelName,
                     ModelYear = switchModel.ModelYear,
-                    FirmwareVersion = switchModel.DefaultFirmwareVersion.Version,
-                    ProductSeries = switchModel.ProductSeries.Name,
-                    ProductLine = switchModel.ProductSeries.ProductLine.Name,
-                    Brand = switchModel.ProductSeries.ProductLine.Brand.Name,
+                    DefaultFirmwareVersion = switchModel.DefaultFirmwareVersion.Version,
+                    ProductSeriesName = switchModel.ProductSeries.Name,
+                    ProductLineName = switchModel.ProductSeries.ProductLine.Name,
+                    BrandName = switchModel.ProductSeries.ProductLine.Brand.Name,
                 })
                 .ToListAsync();
         }
