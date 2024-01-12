@@ -9,14 +9,28 @@
         public object Result { get; set; }
 
 
-        public static ApiResponse GenericError => new ApiResponse { IsError = true, Message = "Error: something went wrong." };
-
-        public static ApiResponse ErrorDataReturnedNull => new ApiResponse { IsError = true, Message = "Error: data returned null." };
-
-
-        public static ApiResponse CustomError(string message)
+        public static ApiResponse CustomError(string message) => new ApiResponse
         {
-            return new ApiResponse { IsError = true, Message = message };
-        }
+            IsError = true,
+            Message = message
+        };
+
+        public static ApiResponse DataReturnedNull => new ApiResponse
+        {
+            IsError = false,
+            Message = "Error: data returned null."
+        };
+
+        public static ApiResponse GenericError => new ApiResponse
+        {
+            IsError = true,
+            Message = "Error: something went wrong."
+        };
+
+        public static ApiResponse IdIsNotValid(int id) => new ApiResponse
+        {
+            IsError = true,
+            Message = $"Error: the ID given is not valid (ID {id})."
+        };
     }
 }

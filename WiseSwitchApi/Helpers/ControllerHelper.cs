@@ -99,24 +99,28 @@ namespace WiseSwitchApi.Helpers
         }
 
 
-        public static IActionResult DataIsNull()
+        #region Prepared <private> controller responses
+
+        private static IActionResult DataIsNull()
         {
-            return new JsonResult(ApiResponse.ErrorDataReturnedNull) { StatusCode = StatusCodes.Status204NoContent };
+            return new JsonResult(ApiResponse.DataReturnedNull) { StatusCode = StatusCodes.Status204NoContent };
         }
 
-        public static IActionResult Error()
+        private static IActionResult Error()
         {
             return new JsonResult(ApiResponse.GenericError) { StatusCode = StatusCodes.Status500InternalServerError };
         }
 
-        public static IActionResult Error409Conflict(string message)
+        private static IActionResult Error409Conflict(string message)
         {
             return new JsonResult(ApiResponse.CustomError(message)) { StatusCode = StatusCodes.Status409Conflict };
         }
 
-        public static IActionResult Success(object data)
+        private static IActionResult Success(object data)
         {
             return new JsonResult(data) { StatusCode = StatusCodes.Status200OK };
         }
+
+        #endregion Prepared controller responses
     }
 }
