@@ -1,11 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using WiseSwitchApi.Data;
-using WiseSwitchApi.Entities;
-using WiseSwitchApi.Repository.Interfaces;
-using WiseSwitchApi.Repository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using WiseSwitchApi.Data;
 using WiseSwitchApi.Helpers;
+using WiseSwitchApi.Identity;
+using WiseSwitchApi.Repository;
+using WiseSwitchApi.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

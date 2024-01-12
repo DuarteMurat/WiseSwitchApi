@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WiseSwitchApi.Entities;
 
-namespace WiseSwitchApi.Entities
+namespace WiseSwitchApi.Identity
 {
     public class IdentityManager : IIdentityManager
     {

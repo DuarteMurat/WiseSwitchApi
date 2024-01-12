@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WiseSwitchApi.Dtos;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Identity;
 
 namespace WiseSwitchApi.Repository.Interfaces
 {

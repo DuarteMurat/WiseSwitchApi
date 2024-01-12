@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Identity;
 
 namespace WiseSwitchApi.Data
 {

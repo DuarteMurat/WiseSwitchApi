@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WiseSwitchApi.Dtos;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Identity;
 using WiseSwitchApi.Repository.Interfaces;
 
 namespace WiseSwitchApi.Repository
