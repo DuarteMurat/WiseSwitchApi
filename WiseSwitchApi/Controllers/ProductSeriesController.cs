@@ -40,6 +40,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets Product Series of Product Line whose ID is the given one.")]
         public async Task<IActionResult> GetOfProductLine(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetComboProductSeriesOfProductLine, id);
         }
 
@@ -48,6 +50,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayModel(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetProductSeriesDisplay, id);
         }
 
@@ -56,6 +60,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the edit model.")]
         public async Task<IActionResult> GetEditModel(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetProductSeriesEditModel, id);
         }
 
@@ -64,6 +70,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetProductSeriesExists, id);
         }
 
@@ -72,6 +80,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the IDs of the related Product Line and Brand.")]
         public async Task<IActionResult> GetIdsOfDependencyChain(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetDependencyChainIdsOfProductSeries, id);
         }
 
@@ -80,6 +90,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetProductSeriesModel, id);
         }
 
@@ -113,6 +125,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Deletes Product Series.")]
         public async Task<IActionResult> Delete(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryDelete(DataOperations.DeleteProductSeries, id);
         }
     }

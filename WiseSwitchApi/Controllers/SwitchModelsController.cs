@@ -40,6 +40,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayModel(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetSwitchModelDisplay, id);
         }
 
@@ -48,6 +50,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the edit model.")]
         public async Task<IActionResult> GetEditModel(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetSwitchModelEditModel, id);
         }
 
@@ -56,6 +60,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetSwitchModelExists, id);
         }
 
@@ -64,6 +70,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryGet(DataOperations.GetSwitchModel, id);
         }
 
@@ -97,6 +105,8 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Deletes Switch Model.")]
         public async Task<IActionResult> Delete(int id)
         {
+            if (id < 1) return ControllerHelper.IdIsNotValid(id);
+
             return await _helper.TryDelete(DataOperations.DeleteSwitchModel, id);
         }
     }

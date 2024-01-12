@@ -91,6 +91,13 @@ namespace WiseSwitchApi.Helpers
         }
 
 
+        // <public> controller response for direct controller use.
+        public static IActionResult IdIsNotValid(int id)
+        {
+            return new JsonResult(ApiResponse.IdIsNotValid(id)) { StatusCode = StatusCodes.Status400BadRequest };
+        }
+
+
         #region Prepared <private> controller responses
 
         private static IActionResult DataIsNull()
