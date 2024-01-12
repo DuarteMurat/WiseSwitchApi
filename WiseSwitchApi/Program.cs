@@ -80,4 +80,26 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Map endpoint for all switch data.
+app.MapGet(
+    pattern: "/api/GetAllForDesktopApp",
+    handler: (DataContext dataContext) => Results.Ok(
+        dataContext.Brands
+            .Select(brand => new
+            {
+                brand.Name,
+                ProductLines = brand.ProductLines.Select(productLine => new
+                {
+                    productLine.Name,
+                    ProductSeries = productLine.ProductSeries.Select(productSeries => new
+                    {
+                        productSeries.Name,
+                        SwitchModels = productSeries.SwitchModel.Select(switchModel => new
+                        {
+                            Name = switchModel.ModelName
+                        })
+                    })
+                })
+            })));
+
 app.Run();
