@@ -32,7 +32,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets all Manufacturers as a Combo, ordered by Name.")]
         public async Task<IActionResult> GetComboManufacturers()
         {
-            return await _helper.TryGet(DataOperations.GetComboManufacturers, null);
+            return await _helper.TryGet(DataOperations.GetAllManufacturersCombo, null);
         }
 
         // GET: api/Manufacturers/Display/{id}
@@ -40,7 +40,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetDisplayManufacturer, id);
+            return await _helper.TryGet(DataOperations.GetManufacturerDisplay, id);
         }
 
         // GET: api/Manufacturers/EditModel/{id}
@@ -48,7 +48,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the edit model.")]
         public async Task<IActionResult> GetEditModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetEditModelManufacturer, id);
+            return await _helper.TryGet(DataOperations.GetManufacturerEditModel, id);
         }
 
         // GET: api/Manufacturers/Exists/{id}
@@ -56,7 +56,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
-            return await _helper.TryGet(DataOperations.GetExistsManufacturer, id);
+            return await _helper.TryGet(DataOperations.GetManufacturerExists, id);
         }
 
         // GET: api/Manufacturers/Model/{id}
@@ -64,7 +64,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetModelManufacturer, id);
+            return await _helper.TryGet(DataOperations.GetManufacturerModel, id);
         }
 
 

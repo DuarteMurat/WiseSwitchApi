@@ -32,7 +32,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets all Switch Models as a Combo, ordered by Name.")]
         public async Task<IActionResult> GetComboSwitchModels()
         {
-            return await _helper.TryGet(DataOperations.GetComboSwitchModels, null);
+            return await _helper.TryGet(DataOperations.GetAllSwitchModelsCombo, null);
         }
 
         // GET: api/SwitchModels/Display/{id}
@@ -40,7 +40,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetDisplaySwitchModel, id);
+            return await _helper.TryGet(DataOperations.GetSwitchModelDisplay, id);
         }
 
         // GET: api/SwitchModels/EditModel/{id}
@@ -48,7 +48,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the edit model.")]
         public async Task<IActionResult> GetEditModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetEditModelSwitchModel, id);
+            return await _helper.TryGet(DataOperations.GetSwitchModelEditModel, id);
         }
 
         // GET: api/SwitchModels/Exists/{id}
@@ -56,7 +56,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
-            return await _helper.TryGet(DataOperations.GetExistsSwitchModel, id);
+            return await _helper.TryGet(DataOperations.GetSwitchModelExists, id);
         }
 
         // GET: api/SwitchModels/Model/{id}
@@ -64,7 +64,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetModelSwitchModel, id);
+            return await _helper.TryGet(DataOperations.GetSwitchModel, id);
         }
 
 

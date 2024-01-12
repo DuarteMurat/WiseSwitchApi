@@ -32,7 +32,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets all Brands as a Combo, ordered by Name.")]
         public async Task<IActionResult> GetCombo()
         {
-            return await _helper.TryGet(DataOperations.GetComboBrands, null);
+            return await _helper.TryGet(DataOperations.GetAllBrandsCombo, null);
         }
 
         // GET: api/Brands/Display/{id}
@@ -40,7 +40,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetDisplayBrand, id);
+            return await _helper.TryGet(DataOperations.GetBrandDisplay, id);
         }
 
         // GET: api/Brands/EditModel/{id}
@@ -48,7 +48,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the edit model.")]
         public async Task<IActionResult> GetEditModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetEditModelBrand, id);
+            return await _helper.TryGet(DataOperations.GetBrandEditModel, id);
         }
 
         // GET: api/Brands/Exists/{id}
@@ -56,7 +56,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
-            return await _helper.TryGet(DataOperations.GetExistsBrand, id);
+            return await _helper.TryGet(DataOperations.GetBrandExists, id);
         }
 
         // GET: api/Brands/Model/{id}
@@ -64,7 +64,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetModelBrand, id);
+            return await _helper.TryGet(DataOperations.GetBrandModel, id);
         }
 
 

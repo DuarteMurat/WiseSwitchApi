@@ -32,7 +32,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets all Firmware Versions as a Combo, ordered by Version.")]
         public async Task<IActionResult> GetComboFirmwareVersions()
         {
-            return await _helper.TryGet(DataOperations.GetComboFirmwareVersions, null);
+            return await _helper.TryGet(DataOperations.GetAllFirmwareVersionsCombo, null);
         }
 
         // GET: api/FirmwareVersions/Display/{id}
@@ -40,7 +40,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetDisplayFirmwareVersion, id);
+            return await _helper.TryGet(DataOperations.GetFirmwareVersionDisplay, id);
         }
 
         // GET: api/FirmwareVersions/EditModel/{id}
@@ -48,7 +48,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetEditModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetEditModelFirmwareVersion, id);
+            return await _helper.TryGet(DataOperations.GetFirmwareVersionEditModel, id);
         }
 
         // GET: api/FirmwareVersions/Exists/{id}
@@ -56,7 +56,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
-            return await _helper.TryGet(DataOperations.GetExistsFirmwareVersion, id);
+            return await _helper.TryGet(DataOperations.GetFirmwareVersionExists, id);
         }
 
         // GET: api/FirmwareVersions/Model/{id}
@@ -64,7 +64,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetModelFirmwareVersion, id);
+            return await _helper.TryGet(DataOperations.GetFirmwareVersionModel, id);
         }
 
 

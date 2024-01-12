@@ -32,7 +32,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets all Product Series as a Combo, ordered by Name.")]
         public async Task<IActionResult> GetComboProductSeries()
         {
-            return await _helper.TryGet(DataOperations.GetComboProductSeries, null);
+            return await _helper.TryGet(DataOperations.GetAllProductSeriesCombo, null);
         }
 
         // GET: api/ProcuctSeries/ComboProductSeriesOfProductLine/{id}
@@ -48,7 +48,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the display model.")]
         public async Task<IActionResult> GetDisplayModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetDisplayProductSeries, id);
+            return await _helper.TryGet(DataOperations.GetProductSeriesDisplay, id);
         }
 
         // GET: api/ProductSeries/EditModel/{id}
@@ -56,7 +56,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets the edit model.")]
         public async Task<IActionResult> GetEditModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetEditModelProductSeries, id);
+            return await _helper.TryGet(DataOperations.GetProductSeriesEditModel, id);
         }
 
         // GET: api/ProductSeries/Exists/{id}
@@ -64,7 +64,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets bool whether object exists in the database.")]
         public async Task<IActionResult> GetExists(int id)
         {
-            return await _helper.TryGet(DataOperations.GetExistsProductSeries, id);
+            return await _helper.TryGet(DataOperations.GetProductSeriesExists, id);
         }
 
         // GET: api/ProductSeries/IdsOfDependencyChain/{id}
@@ -80,7 +80,7 @@ namespace WiseSwitchApi.Controllers
         [SwaggerOperation(Summary = "Gets object as registered in the database.")]
         public async Task<IActionResult> GetModel(int id)
         {
-            return await _helper.TryGet(DataOperations.GetModelProductSeries, id);
+            return await _helper.TryGet(DataOperations.GetProductSeriesModel, id);
         }
 
 
