@@ -4,11 +4,11 @@ namespace WiseSwitchApi.Helpers
 {
     public class ControllerHelper
     {
-        private readonly DataHelper _dataHelper;
+        private readonly DataService _dataService;
 
-        public ControllerHelper(DataHelper dataHelper)
+        public ControllerHelper(DataService dataService)
         {
-            _dataHelper = dataHelper;
+            _dataService = dataService;
         }
 
 
@@ -16,7 +16,7 @@ namespace WiseSwitchApi.Helpers
         {
             try
             {
-                var data = await _dataHelper.GetDataAsync(dataOperation, value);
+                var data = await _dataService.GetDataAsync(dataOperation, value);
                 if (data == null) return DataIsNull();
 
                 // Success.
@@ -33,7 +33,7 @@ namespace WiseSwitchApi.Helpers
         {
             try
             {
-                var model = await _dataHelper.PostDataAsync(dataOperation, value);
+                var model = await _dataService.PostDataAsync(dataOperation, value);
                 if (model == null) return DataIsNull();
 
                 // Success.
@@ -56,7 +56,7 @@ namespace WiseSwitchApi.Helpers
         {
             try
             {
-                var model = await _dataHelper.PutDataAsync(dataOperation, value);
+                var model = await _dataService.PutDataAsync(dataOperation, value);
                 if (model == null) return DataIsNull();
 
                 // Success.
@@ -79,7 +79,7 @@ namespace WiseSwitchApi.Helpers
         {
             try
             {
-                var model = await _dataHelper.DeleteDataAsync(dataOperation, value);
+                var model = await _dataService.DeleteDataAsync(dataOperation, value);
                 if (model == null) return DataIsNull();
 
                 // Success.

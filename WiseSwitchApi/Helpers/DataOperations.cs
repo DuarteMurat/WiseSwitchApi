@@ -21,52 +21,52 @@
         // -- Get --
 
         // Brand.
-        public const string GetAllBrandsOrderByName = "AllBrandsOrderByName";
-        public const string GetComboBrands = "ComboBrands";
-        public const string GetDisplayBrand = "DisplayBrand";
-        public const string GetEditModelBrand = "EditModelBrand";
-        public const string GetExistsBrand = "ExistsBrand";
-        public const string GetModelBrand = "ModelBrand";
+        public const string GetAllBrandsCombo = "GetAllBrandsCombo";
+        public const string GetAllBrandsOrderByName = "GetAllBrandsOrderByName";
+        public const string GetBrandDisplay = "GetBrandDisplay";
+        public const string GetBrandEditModel = "GetBrandEditModel";
+        public const string GetBrandExists = "GetBrandExists";
+        public const string GetBrandModel = "GetBrandModel";
         // Firmware Version.
-        public const string GetAllFirmwareVersionsOrderByVersion = "AllFirmwareVersionsOrderByVersion";
-        public const string GetComboFirmwareVersions = "ComboFirmwareVersions";
-        public const string GetDisplayFirmwareVersion = "DisplayFirmwareVersion";
-        public const string GetEditModelFirmwareVersion = "EditModelFirmwareVersion";
-        public const string GetExistsFirmwareVersion = "ExistsFirmwareVersion";
-        public const string GetModelFirmwareVersion = "ModelFirmwareVersion";
+        public const string GetAllFirmwareVersionsCombo = "GetAllFirmwareVersionsCombo";
+        public const string GetAllFirmwareVersionsOrderByVersion = "GetAllFirmwareVersionsOrderByVersion";
+        public const string GetFirmwareVersionDisplay = "GetFirmwareVersionDisplay";
+        public const string GetFirmwareVersionEditModel = "GetFirmwareVersionEditModel";
+        public const string GetFirmwareVersionExists = "GetFirmwareVersionExists";
+        public const string GetFirmwareVersionModel = "GetFirmwareVersionModel";
         // Manufacturer.
-        public const string GetAllManufacturersOrderByName = "AllManufacturersOrderByName";
-        public const string GetComboManufacturers = "ComboManufacturers";
-        public const string GetDisplayManufacturer = "DisplayManufacturer";
-        public const string GetEditModelManufacturer = "EditModelManufacturer";
-        public const string GetExistsManufacturer = "ExistsManufacturer";
-        public const string GetModelManufacturer = "ModelManufacturer";
+        public const string GetAllManufacturersCombo = "GetAllManufacturersCombo";
+        public const string GetAllManufacturersOrderByName = "GetAllManufacturersOrderByName";
+        public const string GetManufacturerDisplay = "GetManufacturerDisplay";
+        public const string GetManufacturerEditModel = "GetManufacturerEditModel";
+        public const string GetManufacturerExists = "GetManufacturerExists";
+        public const string GetManufacturerModel = "GetManufacturerModel";
         // Product Line.
-        public const string GetAllProductLinesOrderByName = "AllProductLinesOrderByName";
-        public const string GetBrandIdOfProductLine = "BrandIdOfProductLine";
-        public const string GetComboProductLines = "ComboProductLines";
-        public const string GetDisplayProductLine = "DisplayProductLine";
-        public const string GetEditModelProductLine = "EditModelProductLine";
-        public const string GetExistsProductLine = "ExistsProductLine";
-        public const string GetModelProductLine = "ModelProductLine";
-        public const string GetComboProductLinesOfBrand = "ComboProductLinesOfBrand";
+        public const string GetAllProductLinesCombo = "GetAllProductLinesCombo";
+        public const string GetAllProductLinesOrderByName = "GetAllProductLinesOrderByName";
+        public const string GetBrandIdOfProductLine = "GetBrandIdOfProductLine";
+        public const string GetComboProductLinesOfBrand = "GetComboProductLinesOfBrand";
+        public const string GetProductLineDisplay = "GetProductLineDisplay";
+        public const string GetProductLineEditModel = "GetProductLineEditModel";
+        public const string GetProductLineExists = "GetProductLineExists";
+        public const string GetProductLineModel = "GetProductLineModel";
         // Product Series.
-        public const string GetAllProductSeriesOrderByName = "AllProductSeriesOrderByName";
-        public const string GetComboProductSeries = "ComboProductSeries";
-        public const string GetDependencyChainIdsOfProductSeries = "DependencyChainIdsOfProductSeries";
-        public const string GetDisplayProductSeries = "DisplayProductSeries";
-        public const string GetEditModelProductSeries = "EditModelProductSeries";
-        public const string GetExistsProductSeries = "ExistsProductSeries";
-        public const string GetModelProductSeries = "ModelProductSeries";
-        public const string GetComboProductSeriesOfProductLine = "ComboProductSeriesOfProductLine";
+        public const string GetAllProductSeriesCombo = "GetAllProductSeriesCombo";
+        public const string GetAllProductSeriesOrderByName = "GetAllProductSeriesOrderByName";
+        public const string GetComboProductSeriesOfProductLine = "GetComboProductSeriesOfProductLine";
+        public const string GetDependencyChainIdsOfProductSeries = "GetDependencyChainIdsOfProductSeries";
+        public const string GetProductSeriesDisplay = "GetProductSeriesDisplay";
+        public const string GetProductSeriesEditModel = "GetProductSeriesEditModel";
+        public const string GetProductSeriesExists = "GetProductSeriesExists";
+        public const string GetProductSeriesModel = "GetProductSeriesModel";
         // Switch Model.
-        public const string GetAllSwitchModelsOrderByModelName = "AllSwitchModelOrderByName";
-        public const string GetCreateModelForSwitchModel = "CreateModelForSwitchModel";
-        public const string GetComboSwitchModels = "ComboSwitchModel";
-        public const string GetDisplaySwitchModel = "DisplaySwitchModel";
-        public const string GetEditModelSwitchModel = "EditModelSwitchModel";
-        public const string GetExistsSwitchModel = "ExistsSwitchModel";
-        public const string GetModelSwitchModel = "ModelSwitchModel";
+        public const string GetAllSwitchModelsCombo = "GetAllSwitchModelsCombo";
+        public const string GetAllSwitchModelsOrderByModelName = "GetAllSwitchModelOrderByName";
+        public const string GetSwitchModelCreateModel = "GetSwitchModelCreateModel";
+        public const string GetSwitchModelDisplay = "GetSwitchModelDisplay";
+        public const string GetSwitchModelEditModel = "GetSwitchModelEditModel";
+        public const string GetSwitchModelExists = "GetSwitchModelExists";
+        public const string GetSwitchModel = "GetSwitchModelModel";
 
 
         // -- Update --

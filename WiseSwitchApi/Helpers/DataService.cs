@@ -1,13 +1,14 @@
 ﻿using WiseSwitchApi.Data;
-using WiseSwitchApi.Entities;
+using WiseSwitchApi.Dtos;
+using WiseSwitchApi.Repository.Interfaces;
 
 namespace WiseSwitchApi.Helpers
 {
-    public class DataHelper
+    public class DataService
     {
         private readonly IDataUnit _dataUnit;
 
-        public DataHelper(IDataUnit dataUnit)
+        public DataService(IDataUnit dataUnit)
         {
             _dataUnit = dataUnit;
         }
@@ -19,51 +20,51 @@ namespace WiseSwitchApi.Helpers
             return dataOperation switch
             {
                 // Brand.
-                DataOperations.GetAllBrandsOrderByName => await _dataUnit.Brands.GetAllOrderByNameAsync(),
-                DataOperations.GetComboBrands => await _dataUnit.Brands.GetComboBrandsAsync(),
-                DataOperations.GetDisplayBrand => await _dataUnit.Brands.GetDisplayDtoAsync((int)value),
-                DataOperations.GetEditModelBrand => await _dataUnit.Brands.GetEditDtoAsync((int)value),
-                DataOperations.GetExistsBrand => await _dataUnit.Brands.ExistsAsync((int)value),
-                DataOperations.GetModelBrand => await _dataUnit.Brands.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetAllBrandsOrderByName => await _dataUnit.Brands.GetAllAsync(),
+                DataOperations.GetAllBrandsCombo => await _dataUnit.Brands.GetComboAsync(),
+                DataOperations.GetBrandDisplay => await _dataUnit.Brands.GetDisplayModelAsync((int)value),
+                DataOperations.GetBrandEditModel => await _dataUnit.Brands.GetEditModelAsync((int)value),
+                DataOperations.GetBrandExists => await _dataUnit.Brands.ExistsAsync((int)value),
+                DataOperations.GetBrandModel => await _dataUnit.Brands.GetAsNoTrackingAsync((int)value),
                 // Firmware Version.
                 DataOperations.GetAllFirmwareVersionsOrderByVersion => await _dataUnit.FirmwareVersions.GetAllOrderByVersionAsync(),
-                DataOperations.GetComboFirmwareVersions => await _dataUnit.FirmwareVersions.GetComboFirmwareVersionsAsync(),
-                DataOperations.GetDisplayFirmwareVersion => await _dataUnit.FirmwareVersions.GetDisplayDtoAsync((int)value),
-                DataOperations.GetEditModelFirmwareVersion => await _dataUnit.FirmwareVersions.GetEditDtoAsync((int)value),
-                DataOperations.GetExistsFirmwareVersion => await _dataUnit.FirmwareVersions.ExistsAsync((int)value),
-                DataOperations.GetModelFirmwareVersion => await _dataUnit.FirmwareVersions.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetAllFirmwareVersionsCombo => await _dataUnit.FirmwareVersions.GetComboFirmwareVersionsAsync(),
+                DataOperations.GetFirmwareVersionDisplay => await _dataUnit.FirmwareVersions.GetDisplayModelAsync((int)value),
+                DataOperations.GetFirmwareVersionEditModel => await _dataUnit.FirmwareVersions.GetEditModelAsync((int)value),
+                DataOperations.GetFirmwareVersionExists => await _dataUnit.FirmwareVersions.ExistsAsync((int)value),
+                DataOperations.GetFirmwareVersionModel => await _dataUnit.FirmwareVersions.GetAsNoTrackingByIdAsync((int)value),
                 // Manufacturer.
                 DataOperations.GetAllManufacturersOrderByName => await _dataUnit.Manufacturers.GetAllOrderByNameAsync(),
-                DataOperations.GetComboManufacturers => await _dataUnit.Manufacturers.GetComboManufacturersAsync(),
-                DataOperations.GetDisplayManufacturer => await _dataUnit.Manufacturers.GetDisplayDtoAsync((int)value),
-                DataOperations.GetEditModelManufacturer => await _dataUnit.Manufacturers.GetEditDtoAsync((int)value),
-                DataOperations.GetExistsManufacturer => await _dataUnit.Manufacturers.ExistsAsync((int)value),
-                DataOperations.GetModelManufacturer => await _dataUnit.Manufacturers.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetAllManufacturersCombo => await _dataUnit.Manufacturers.GetComboManufacturersAsync(),
+                DataOperations.GetManufacturerDisplay => await _dataUnit.Manufacturers.GetDisplayDtoAsync((int)value),
+                DataOperations.GetManufacturerEditModel => await _dataUnit.Manufacturers.GetEditDtoAsync((int)value),
+                DataOperations.GetManufacturerExists => await _dataUnit.Manufacturers.ExistsAsync((int)value),
+                DataOperations.GetManufacturerModel => await _dataUnit.Manufacturers.GetAsNoTrackingByIdAsync((int)value),
                 // Product Line.
                 DataOperations.GetAllProductLinesOrderByName => await _dataUnit.ProductLines.GetAllOrderByNameAsync(),
                 DataOperations.GetBrandIdOfProductLine => await _dataUnit.ProductLines.GetBrandIdAsync((int)value),
-                DataOperations.GetComboProductLines => await _dataUnit.ProductLines.GetComboProductLinesAsync(),
-                DataOperations.GetDisplayProductLine => await _dataUnit.ProductLines.GetDisplayDtoAsync((int)value),
-                DataOperations.GetEditModelProductLine => await _dataUnit.ProductLines.GetEditDtoAsync((int)value),
-                DataOperations.GetExistsProductLine => await _dataUnit.ProductLines.ExistsAsync((int)value),
-                DataOperations.GetModelProductLine => await _dataUnit.ProductLines.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetAllProductLinesCombo => await _dataUnit.ProductLines.GetComboProductLinesAsync(),
                 DataOperations.GetComboProductLinesOfBrand => await _dataUnit.ProductLines.GetComboProductLinesOfBrandAsync((int)value),
+                DataOperations.GetProductLineDisplay => await _dataUnit.ProductLines.GetDisplayDtoAsync((int)value),
+                DataOperations.GetProductLineEditModel => await _dataUnit.ProductLines.GetEditDtoAsync((int)value),
+                DataOperations.GetProductLineExists => await _dataUnit.ProductLines.ExistsAsync((int)value),
+                DataOperations.GetProductLineModel => await _dataUnit.ProductLines.GetAsNoTrackingByIdAsync((int)value),
                 // Product Series.
                 DataOperations.GetAllProductSeriesOrderByName => await _dataUnit.ProductSeries.GetAllOrderByNameAsync(),
-                DataOperations.GetComboProductSeries => await _dataUnit.ProductSeries.GetComboProductSeriesAsync(),
-                DataOperations.GetDependencyChainIdsOfProductSeries => await _dataUnit.ProductSeries.GetDependencyChainIdsAsync((int)value),
-                DataOperations.GetDisplayProductSeries => await _dataUnit.ProductSeries.GetDisplayDtoAsync((int)value),
-                DataOperations.GetEditModelProductSeries => await _dataUnit.ProductSeries.GetEditDtoAsync((int)value),
-                DataOperations.GetExistsProductSeries => await _dataUnit.ProductSeries.ExistsAsync((int)value),
-                DataOperations.GetModelProductSeries => await _dataUnit.ProductSeries.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetAllProductSeriesCombo => await _dataUnit.ProductSeries.GetComboProductSeriesAsync(),
                 DataOperations.GetComboProductSeriesOfProductLine => await _dataUnit.ProductSeries.GetComboProductSeriesOfProductLineAsync((int)value),
+                DataOperations.GetDependencyChainIdsOfProductSeries => await _dataUnit.ProductSeries.GetDependencyChainIdsAsync((int)value),
+                DataOperations.GetProductSeriesDisplay => await _dataUnit.ProductSeries.GetDisplayDtoAsync((int)value),
+                DataOperations.GetProductSeriesEditModel => await _dataUnit.ProductSeries.GetEditDtoAsync((int)value),
+                DataOperations.GetProductSeriesExists => await _dataUnit.ProductSeries.ExistsAsync((int)value),
+                DataOperations.GetProductSeriesModel => await _dataUnit.ProductSeries.GetAsNoTrackingByIdAsync((int)value),
                 // Switch Model.
                 DataOperations.GetAllSwitchModelsOrderByModelName => await _dataUnit.SwitchModels.GetAllOrderByModelNameAsync(),
-                DataOperations.GetComboSwitchModels => await _dataUnit.SwitchModels.GetComboSwitchModelsAsync(),
-                DataOperations.GetDisplaySwitchModel => await _dataUnit.SwitchModels.GetDisplayDtoAsync((int)value),
-                DataOperations.GetEditModelSwitchModel => await _dataUnit.SwitchModels.GetEditDtoAsync((int)value),
-                DataOperations.GetExistsSwitchModel => await _dataUnit.SwitchModels.ExistsAsync((int)value),
-                DataOperations.GetModelSwitchModel => await _dataUnit.SwitchModels.GetAsNoTrackingByIdAsync((int)value),
+                DataOperations.GetAllSwitchModelsCombo => await _dataUnit.SwitchModels.GetComboSwitchModelsAsync(),
+                DataOperations.GetSwitchModelDisplay => await _dataUnit.SwitchModels.GetDisplayDtoAsync((int)value),
+                DataOperations.GetSwitchModelEditModel => await _dataUnit.SwitchModels.GetEditDtoAsync((int)value),
+                DataOperations.GetSwitchModelExists => await _dataUnit.SwitchModels.ExistsAsync((int)value),
+                DataOperations.GetSwitchModel => await _dataUnit.SwitchModels.GetAsNoTrackingByIdAsync((int)value),
 
                 _ => throw new InvalidOperationException(dataOperation),
             };
@@ -71,7 +72,7 @@ namespace WiseSwitchApi.Helpers
 
 
         // Post data.
-        public async Task<IEntity> PostDataAsync(string dataOperation, object value)
+        public async Task<IEntity> PostDataAsync(string dataOperation, ICreateModel value)
         {
             IEntity posted = dataOperation switch
             {
@@ -94,7 +95,7 @@ namespace WiseSwitchApi.Helpers
 
 
         // Put data.
-        public async Task<IEntity> PutDataAsync(string dataOperation, object value)
+        public async Task<IEntity> PutDataAsync(string dataOperation, IEditModel value)
         {
             IEntity putted = dataOperation switch
             {

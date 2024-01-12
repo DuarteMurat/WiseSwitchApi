@@ -42,7 +42,7 @@ builder.Services.AddScoped<ISwitchModelRepository, SwitchModelRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<ControllerHelper>();
-builder.Services.AddScoped<DataHelper>();
+builder.Services.AddScoped<DataService>();
 
 builder.Services.AddControllers();
 
