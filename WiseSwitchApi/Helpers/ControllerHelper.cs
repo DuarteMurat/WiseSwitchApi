@@ -41,14 +41,7 @@ namespace WiseSwitchApi.Helpers
             }
             catch (Exception ex)
             {
-                // Get custom error message, if exception is one expected.
-                var message = ExceptionHandling.GetCustomErrorMessage(ex);
-                
-                // If there is a custom message, return it.
-                if (message != null) return Error409Conflict(message);
-
-                // Generic error.
-                return Error();
+                return HandleException(ex);
             }
         }
 
@@ -64,14 +57,7 @@ namespace WiseSwitchApi.Helpers
             }
             catch (Exception ex)
             {
-                // Get error message if exception is one expected.
-                var message = ExceptionHandling.GetCustomErrorMessage(ex);
-
-                // If there is message, return it.
-                if (message != null) return Error409Conflict(message);
-
-                // Generic error.
-                return Error();
+                return HandleException(ex);
             }
         }
 
@@ -87,15 +73,21 @@ namespace WiseSwitchApi.Helpers
             }
             catch (Exception ex)
             {
-                // Get error message if exception is one expected.
-                var message = ExceptionHandling.GetCustomErrorMessage(ex);
-
-                // If there is message, return it.
-                if (message != null) return Error409Conflict(message);
-
-                // Generic error.
-                return Error();
+                return HandleException(ex);
             }
+        }
+
+
+        private static IActionResult HandleException(Exception ex)
+        {
+            // Get error message if exception is one expected.
+            var message = ExceptionHandling.GetCustomErrorMessage(ex);
+
+            // If there is message, return it.
+            if (message != null) return Error409Conflict(message);
+
+            // Generic error.
+            return Error();
         }
 
 
