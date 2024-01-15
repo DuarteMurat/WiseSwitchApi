@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Dtos.Brand
 {
-    public class IndexRowBrandDto
+    public class IndexRowBrandDto : IIndexRow
     {
         public int Id { get; set; }
 

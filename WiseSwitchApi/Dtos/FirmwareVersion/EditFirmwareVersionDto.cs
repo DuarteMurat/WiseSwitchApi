@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Dtos.FirmwareVersion
 {
-    public class EditFirmwareVersionDto
+    public class EditFirmwareVersionDto : IEditModel
     {
         public int Id { get; set; }
 

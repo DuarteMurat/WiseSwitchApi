@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Dtos.Brand
 {
-    public class CreateBrandDto
+    public class CreateBrandDto : ICreateModel
     {
         public string Name { get; set; }
 

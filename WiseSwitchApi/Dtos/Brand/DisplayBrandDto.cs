@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Dtos.Brand
 {
-    public class DisplayBrandDto
+    public class DisplayBrandDto : IDisplayModel
     {
         public int Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Dtos.FirmwareVersion
 {
-    public class DisplayFirmwareVersionDto
+    public class DisplayFirmwareVersionDto: IDisplayModel
     {
         public int Id { get; set; }
 

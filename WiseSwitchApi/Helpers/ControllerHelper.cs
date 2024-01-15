@@ -102,7 +102,7 @@ namespace WiseSwitchApi.Helpers
 
         private static IActionResult DataIsNull()
         {
-            return new JsonResult(ApiResponse.DataReturnedNull) { StatusCode = StatusCodes.Status204NoContent };
+            return new JsonResult(ApiResponse.DataReturnedNull) { StatusCode = StatusCodes.Status404NotFound };
         }
 
         private static IActionResult Error()

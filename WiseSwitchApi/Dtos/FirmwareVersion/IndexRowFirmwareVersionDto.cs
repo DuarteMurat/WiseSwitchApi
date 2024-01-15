@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Dtos.FirmwareVersion
 {
-    public class IndexRowFirmwareVersionDto
+    public class IndexRowFirmwareVersionDto : IIndexRow
     {
         public int Id { get; set; }
 

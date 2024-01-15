@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Dtos.FirmwareVersion
 {
-    public class CreateFirmwareVersionDto
+    public class CreateFirmwareVersionDto : ICreateModel
     {
         public string Version { get; set; }
 
