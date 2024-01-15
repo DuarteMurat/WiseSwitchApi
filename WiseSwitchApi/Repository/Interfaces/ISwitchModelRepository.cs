@@ -1,25 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using WiseSwitchApi.Dtos.SwitchModel;
+﻿using WiseSwitchApi.Dtos.SwitchModel;
 using WiseSwitchApi.Entities;
 
 namespace WiseSwitchApi.Repository.Interfaces
 {
-    public interface ISwitchModelRepository
+    public interface ISwitchModelRepository : IGenericRepository<SwitchModel>
     {
-        Task<SwitchModel> CreateAsync(SwitchModel switchModel);
         Task<SwitchModel> CreateFromObjectAsync(object value);
-        Task<SwitchModel> DeleteAsync(int id);
-        Task<bool> ExistsAsync(int id);
-        Task<bool> ExistsAsync(string modelName);
-        Task<IEnumerable<IndexRowSwitchModelDto>> GetAllOrderByModelNameAsync();
-        Task<SwitchModel> GetAsNoTrackingByIdAsync(int id);
+        Task<IEnumerable<IndexRowSwitchModelDto>> GetAllAsync();
         Task<int> GetBrandIdAsync(int switchModelId);
-        Task<IEnumerable<SelectListItem>> GetComboSwitchModelsAsync();
-        Task<DisplaySwitchModelDto> GetDisplayDtoAsync(int id);
-        Task<EditSwitchModelDto> GetEditDtoAsync(int id);
+        Task<DisplaySwitchModelDto> GetDisplayModelAsync(int id);
+        Task<EditSwitchModelDto> GetEditModelAsync(int id);
         Task<IEnumerable<string>> GetSwitchModelsNamesOfFirmwareVersionAsync(int firmwareVersionId);
         Task<IEnumerable<string>> GetSwitchModelsNamesOfProductSeriesAsync(int productSeriesId);
-        SwitchModel Update(SwitchModel switchModel);
         SwitchModel UpdateFromObject(object value);
     }
 }

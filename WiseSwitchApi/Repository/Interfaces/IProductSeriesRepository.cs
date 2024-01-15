@@ -4,25 +4,16 @@ using WiseSwitchApi.Entities;
 
 namespace WiseSwitchApi.Repository.Interfaces
 {
-    public interface IProductSeriesRepository
+    public interface IProductSeriesRepository : IGenericRepository<ProductSeries>
     {
-        Task<ProductSeries> CreateAsync(ProductSeries productSeries);
         Task<ProductSeries> CreateFromObjectAsync(object value);
-        Task<ProductSeries> DeleteAsync(int id);
-        Task<bool> ExistsAsync(int id);
-        Task<bool> ExistsAsync(string productSeriesName);
-        IQueryable<ProductSeries> GetAllAsNoTracking();
-        Task<IEnumerable<IndexRowProductSeriesDto>> GetAllOrderByNameAsync();
-        Task<ProductSeries> GetAsNoTrackingByIdAsync(int id);
-        Task<IEnumerable<SelectListItem>> GetComboProductSeriesAsync();
+        Task<IEnumerable<IndexRowProductSeriesDto>> GetAllAsync();
         Task<IEnumerable<SelectListItem>> GetComboProductSeriesOfProductLineAsync(int productLineId);
         Task<ProductSeriesDependencyChainIds> GetDependencyChainIdsAsync(int id);
-        Task<DisplayProductSeriesDto> GetDisplayDtoAsync(int id);
-        Task<EditProductSeriesDto> GetEditDtoAsync(int id);
-        Task<ProductSeries> GetForUpdateAsync(int id);
+        Task<DisplayProductSeriesDto> GetDisplayModelAsync(int id);
+        Task<EditProductSeriesDto> GetEditModelAsync(int id);
         Task<int> GetIdFromNameAsync(string name);
         Task<IEnumerable<string>> GetProductSeriesNamesOfProductLineAsync(int productLineId);
-        ProductSeries Update(ProductSeries productSeries);
         ProductSeries UpdateFromObject(object value);
     }
 }

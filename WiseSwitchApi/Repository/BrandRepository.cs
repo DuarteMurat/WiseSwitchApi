@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WiseSwitchApi.Data;
 using WiseSwitchApi.Dtos.Brand;
 using WiseSwitchApi.Entities;
@@ -7,19 +6,25 @@ using WiseSwitchApi.Repository.Interfaces;
 
 namespace WiseSwitchApi.Repository
 {
-    public class BrandRepository : IBrandRepository
+    public class BrandRepository : GenericRepository<Brand>, IBrandRepository
     {
         private readonly DbSet<Brand> _brandDbSet;
 
-        public BrandRepository(DataContext context)
+        public BrandRepository(DataContext dataContext) : base(dataContext)
         {
-            _brandDbSet = context.Brands;
+            _brandDbSet = dataContext.Brands;
         }
 
 
-        public async Task<Brand> CreateAsync(Brand brand)
+        public async Task<DisplayBrandDto> CreateAsync(CreateBrandDto model)
         {
-            return (await _brandDbSet.AddAsync(brand)).Entity;
+            var created = await CreateAsync(new Brand
+            {
+                Name = model.Name,
+                ManufacturerId = model.ManufacturerId,
+            });
+
+            return await GetDisplayModelAsync(created.Id);
         }
 
         public async Task<Brand> CreateFromObjectAsync(object value)
@@ -35,40 +40,20 @@ namespace WiseSwitchApi.Repository
                 });
             }
 
-            throw new NotImplementedException();
+            throw new NotImplementedException("Could not create entity because the model is not expected.");
         }
 
-        public async Task<Brand> DeleteAsync(int id)
-        {
-            return _brandDbSet.Remove(await _brandDbSet.FindAsync(id)).Entity;
-        }
-
-        public async Task<bool> ExistsAsync(int id)
-        {
-            return await _brandDbSet.AnyAsync(brand => brand.Id == id);
-        }
-
-        public async Task<bool> ExistsAsync(string name)
-        {
-            return await _brandDbSet.AnyAsync(brand => brand.Name == name);
-        }
-
-        public async Task<IEnumerable<IndexRowBrandDto>> GetAllOrderByNameAsync()
+        public async Task<IEnumerable<IndexRowBrandDto>> GetAllAsync()
         {
             return await _brandDbSet
-                .OrderBy(brand => brand.Name)
                 .Select(brand => new IndexRowBrandDto
                 {
                     Id = brand.Id,
                     Name = brand.Name,
                     ManufacturerName = brand.Manufacturer.Name,
                 })
+                .OrderBy(brand => brand.Name)
                 .ToListAsync();
-        }
-
-        public async Task<Brand> GetAsNoTrackingByIdAsync(int id)
-        {
-            return await _brandDbSet.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<string>> GetBrandNamesOfManufacturerAsync(int manufacturerId)
@@ -79,18 +64,7 @@ namespace WiseSwitchApi.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetComboBrandsAsync()
-        {
-            return await _brandDbSet
-                .Select(brand => new SelectListItem
-                {
-                    Text = brand.Name,
-                    Value = brand.Id.ToString()
-                })
-                .ToListAsync();
-        }
-
-        public async Task<DisplayBrandDto> GetDisplayDtoAsync(int id)
+        public async Task<DisplayBrandDto> GetDisplayModelAsync(int id)
         {
             return await _brandDbSet
                 .Where(brand => brand.Id == id)
@@ -104,7 +78,7 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<EditBrandDto> GetEditDtoAsync(int id)
+        public async Task<EditBrandDto> GetEditModelAsync(int id)
         {
             return await _brandDbSet
                 .Where(brand => brand.Id == id)
@@ -125,9 +99,16 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public Brand Update(Brand brand)
+        public async Task<DisplayBrandDto> Update(EditBrandDto model)
         {
-             return _brandDbSet.Update(brand).Entity;
+            var updated = Update(new Brand
+            {
+                Id = model.Id,
+                Name = model.Name,
+                ManufacturerId = model.ManufacturerId,
+            });
+
+            return await GetDisplayModelAsync(updated.Id);
         }
 
         public Brand UpdateFromObject(object value)
@@ -144,7 +125,7 @@ namespace WiseSwitchApi.Repository
                 });
             }
 
-            throw new NotImplementedException();
+            throw new NotImplementedException("Could not update entity because the model is not expected.");
         }
     }
 }

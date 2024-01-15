@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WiseSwitchApi.Data;
 using WiseSwitchApi.Dtos.SwitchModel;
 using WiseSwitchApi.Entities;
@@ -7,20 +6,15 @@ using WiseSwitchApi.Repository.Interfaces;
 
 namespace WiseSwitchApi.Repository
 {
-    public class SwitchModelRepository : ISwitchModelRepository
+    public class SwitchModelRepository : GenericRepository<SwitchModel>, ISwitchModelRepository
     {
         public DbSet<SwitchModel> _switchModelDbSet;
 
-        public SwitchModelRepository(DataContext context)
+        public SwitchModelRepository(DataContext dataContext) : base(dataContext)
         {
-            _switchModelDbSet = context.SwitchModels;
+            _switchModelDbSet = dataContext.SwitchModels;
         }
 
-
-        public async Task<SwitchModel> CreateAsync(SwitchModel switchModel)
-        {
-            return (await _switchModelDbSet.AddAsync(switchModel)).Entity;
-        }
 
         public async Task<SwitchModel> CreateFromObjectAsync(object value)
         {
@@ -40,25 +34,9 @@ namespace WiseSwitchApi.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<SwitchModel> DeleteAsync(int id)
-        {
-            return _switchModelDbSet.Remove(await _switchModelDbSet.FindAsync(id)).Entity;
-        }
-
-        public async Task<bool> ExistsAsync(int id)
-        {
-            return await _switchModelDbSet.AnyAsync(brand => brand.Id == id);
-        }
-
-        public async Task<bool> ExistsAsync(string modelName)
-        {
-            return await _switchModelDbSet.AnyAsync(brand => brand.ModelName == modelName);
-        }
-
-        public async Task<IEnumerable<IndexRowSwitchModelDto>> GetAllOrderByModelNameAsync()
+        public async Task<IEnumerable<IndexRowSwitchModelDto>> GetAllAsync()
         {
             return await _switchModelDbSet
-                .OrderBy(switchModel => switchModel.ModelName)
                 .Select(switchModel => new IndexRowSwitchModelDto
                 {
                     Id = switchModel.Id,
@@ -69,12 +47,8 @@ namespace WiseSwitchApi.Repository
                     ProductLineName = switchModel.ProductSeries.ProductLine.Name,
                     BrandName = switchModel.ProductSeries.ProductLine.Brand.Name,
                 })
+                .OrderBy(switchModel => switchModel.ModelName)
                 .ToListAsync();
-        }
-
-        public async Task<SwitchModel> GetAsNoTrackingByIdAsync(int id)
-        {
-            return await _switchModelDbSet.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<int> GetBrandIdAsync(int switchModelId)
@@ -85,18 +59,7 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetComboSwitchModelsAsync()
-        {
-            return await _switchModelDbSet
-                .Select(SwitchModel => new SelectListItem
-                {
-                    Text = SwitchModel.ModelName,
-                    Value = SwitchModel.Id.ToString()
-                })
-                .ToListAsync();
-        }
-
-        public async Task<DisplaySwitchModelDto> GetDisplayDtoAsync(int id)
+        public async Task<DisplaySwitchModelDto> GetDisplayModelAsync(int id)
         {
             return await _switchModelDbSet
                 .Where(switchModel => switchModel.Id == id)
@@ -110,7 +73,7 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<EditSwitchModelDto> GetEditDtoAsync(int id)
+        public async Task<EditSwitchModelDto> GetEditModelAsync(int id)
         {
             return await _switchModelDbSet
                 .Where(switchModel => switchModel.Id == id)
@@ -141,11 +104,6 @@ namespace WiseSwitchApi.Repository
                 .Where(switchModel => switchModel.ProductSeriesId == productSeriesId)
                 .Select(switchModel => switchModel.ModelName)
                 .ToListAsync();
-        }
-
-        public SwitchModel Update(SwitchModel switchModel)
-        {
-            return _switchModelDbSet.Update(switchModel).Entity;
         }
 
         public SwitchModel UpdateFromObject(object value)

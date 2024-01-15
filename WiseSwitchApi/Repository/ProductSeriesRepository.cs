@@ -7,20 +7,15 @@ using WiseSwitchApi.Repository.Interfaces;
 
 namespace WiseSwitchApi.Repository
 {
-    public class ProductSeriesRepository : IProductSeriesRepository
+    public class ProductSeriesRepository : GenericRepository<ProductSeries>, IProductSeriesRepository
     {
         private readonly DbSet<ProductSeries> _productSeriesDbSet;
 
-        public ProductSeriesRepository(DataContext context)
+        public ProductSeriesRepository(DataContext dataContext) : base(dataContext)
         {
-            _productSeriesDbSet = context.ProductSeries;
+            _productSeriesDbSet = dataContext.ProductSeries;
         }
 
-
-        public async Task<ProductSeries> CreateAsync(ProductSeries productSeries)
-        {
-            return (await _productSeriesDbSet.AddAsync(productSeries)).Entity;
-        }
 
         public async Task<ProductSeries> CreateFromObjectAsync(object value)
         {
@@ -38,33 +33,9 @@ namespace WiseSwitchApi.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<ProductSeries> DeleteAsync(int id)
-        {
-            return _productSeriesDbSet.Remove(
-                await _productSeriesDbSet
-                    .SingleAsync(productSeries => productSeries.Id == id)).Entity;
-        }
-
-        public async Task<bool> ExistsAsync(int id)
-        {
-            return await _productSeriesDbSet.AnyAsync(productSeries => productSeries.Id == id);
-        }
-
-        public async Task<bool> ExistsAsync(string productSeriesName)
-        {
-            return await _productSeriesDbSet.AnyAsync(productSeries => productSeries.Name == productSeriesName);
-        }
-
-        public IQueryable<ProductSeries> GetAllAsNoTracking()
-        {
-            return _productSeriesDbSet.AsNoTracking();
-        }
-
-        public async Task<IEnumerable<IndexRowProductSeriesDto>> GetAllOrderByNameAsync()
+        public async Task<IEnumerable<IndexRowProductSeriesDto>> GetAllAsync()
         {
             return await _productSeriesDbSet
-                .AsNoTracking()
-                .OrderBy(productSeries => productSeries.Name)
                 .Select(productSeries => new IndexRowProductSeriesDto
                 {
                     Id = productSeries.Id,
@@ -72,24 +43,7 @@ namespace WiseSwitchApi.Repository
                     ProductLineName = productSeries.ProductLine.Name,
                     BrandName = productSeries.ProductLine.Brand.Name,
                 })
-                .ToListAsync();
-        }
-
-        public async Task<ProductSeries> GetAsNoTrackingByIdAsync(int id)
-        {
-            return await _productSeriesDbSet
-                .AsNoTracking()
-                .SingleOrDefaultAsync(productSeries => productSeries.Id == id);
-        }
-
-        public async Task<IEnumerable<SelectListItem>> GetComboProductSeriesAsync()
-        {
-            return await _productSeriesDbSet
-                .Select(productSeries => new SelectListItem
-                {
-                    Text = productSeries.Name,
-                    Value = productSeries.Id.ToString()
-                })
+                .OrderBy(productSeries => productSeries.Name)
                 .ToListAsync();
         }
 
@@ -117,7 +71,7 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<DisplayProductSeriesDto> GetDisplayDtoAsync(int id)
+        public async Task<DisplayProductSeriesDto> GetDisplayModelAsync(int id)
         {
             return await _productSeriesDbSet
                 .Where(productSeries => productSeries.Id == id)
@@ -132,7 +86,7 @@ namespace WiseSwitchApi.Repository
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<EditProductSeriesDto> GetEditDtoAsync(int id)
+        public async Task<EditProductSeriesDto> GetEditModelAsync(int id)
         {
             return await _productSeriesDbSet
                 .Where(productSeries => productSeries.Id == id)
@@ -144,11 +98,6 @@ namespace WiseSwitchApi.Repository
                     BrandId = productSeries.ProductLine.BrandId,
                 })
                 .SingleOrDefaultAsync();
-        }
-
-        public async Task<ProductSeries> GetForUpdateAsync(int id)
-        {
-            return await _productSeriesDbSet.FindAsync(id);
         }
 
         public async Task<int> GetIdFromNameAsync(string name)
@@ -165,11 +114,6 @@ namespace WiseSwitchApi.Repository
                 .Where(productSeries => productSeries.ProductLineId == productSeriesId)
                 .Select(productSeries => productSeries.Name)
                 .ToListAsync();
-        }
-
-        public ProductSeries Update(ProductSeries productSeries)
-        {
-            return _productSeriesDbSet.Update(productSeries).Entity;
         }
 
         public ProductSeries UpdateFromObject(object value)
