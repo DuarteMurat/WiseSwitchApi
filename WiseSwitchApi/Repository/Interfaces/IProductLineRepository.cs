@@ -7,6 +7,7 @@ namespace WiseSwitchApi.Repository.Interfaces
     public interface IProductLineRepository : IGenericRepository<ProductLine>
     {
         Task<ProductLine> CreateFromObjectAsync(object value);
+        Task<bool> ExistsAsync(string name);
         Task<IEnumerable<IndexRowProductLineDto>> GetAllAsync();
         Task<int> GetBrandIdAsync(int id);
         Task<IEnumerable<SelectListItem>> GetComboProductLinesOfBrandAsync(int brandId);

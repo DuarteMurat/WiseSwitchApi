@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WiseSwitchApi.Entities;
 using WiseSwitchApi.Identity;
 
 namespace WiseSwitchApi.Data
@@ -61,7 +62,7 @@ namespace WiseSwitchApi.Data
 
                 if (!await _dataUnit.Brands.ExistsAsync(brand))
                 {
-                    await _dataUnit.Brands.CreateAsync(new Entities.Brand
+                    await _dataUnit.Brands.CreateAsync(new Brand
                     {
                         Name = name,
                         ManufacturerId = await _dataUnit.Manufacturers.GetIdFromNameAsync(manufacturer)
@@ -81,7 +82,7 @@ namespace WiseSwitchApi.Data
 
                 if (!await _dataUnit.FirmwareVersions.ExistsAsync(firmwareVersion))
                 {
-                    await _dataUnit.FirmwareVersions.CreateAsync(new Entities.FirmwareVersion
+                    await _dataUnit.FirmwareVersions.CreateAsync(new FirmwareVersion
                     {
                         Version = version,
                         LaunchDate = string.IsNullOrEmpty(launchDate) ? null : DateTime.Parse(launchDate),
@@ -98,7 +99,7 @@ namespace WiseSwitchApi.Data
             {
                 if (!await _dataUnit.Manufacturers.ExistsAsync(manufacturerName))
                 {
-                    await _dataUnit.Manufacturers.CreateAsync(new Entities.Manufacturer { Name = manufacturerName });
+                    await _dataUnit.Manufacturers.CreateAsync(new Manufacturer { Name = manufacturerName });
                 }
             }
         }
@@ -117,7 +118,7 @@ namespace WiseSwitchApi.Data
 
                 if (!await _dataUnit.ProductLines.ExistsAsync(productLine))
                 {
-                    await _dataUnit.ProductLines.CreateAsync(new Entities.ProductLine
+                    await _dataUnit.ProductLines.CreateAsync(new ProductLine
                     {
                         Name = name,
                         BrandId = await _dataUnit.Brands.GetIdFromNameAsync(brand)
@@ -140,7 +141,7 @@ namespace WiseSwitchApi.Data
 
                 if (!await _dataUnit.ProductSeries.ExistsAsync(productSeries))
                 {
-                    await _dataUnit.ProductSeries.CreateAsync(new Entities.ProductSeries
+                    await _dataUnit.ProductSeries.CreateAsync(new ProductSeries
                     {
                         Name = name,
                         ProductLineId = await _dataUnit.ProductLines.GetIdFromNameAsync(productLine)
@@ -180,7 +181,7 @@ namespace WiseSwitchApi.Data
 
                     if (!await _dataUnit.SwitchModels.ExistsAsync(switchModel))
                     {
-                        await _dataUnit.SwitchModels.CreateAsync(new Entities.SwitchModel
+                        await _dataUnit.SwitchModels.CreateAsync(new SwitchModel
                         {
                             ModelName = modelName,
                             ModelYear = modelYear,

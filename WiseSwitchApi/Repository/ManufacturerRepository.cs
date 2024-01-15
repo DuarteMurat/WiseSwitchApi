@@ -31,6 +31,11 @@ namespace WiseSwitchApi.Repository
             throw new NotImplementedException();
         }
 
+        public async Task<bool> ExistsAsync(string name)
+        {
+            return await _manufacturerDbSet.AnyAsync(manufacturer => manufacturer.Name == name);
+        }
+
         public async Task<IEnumerable<IndexRowManufacturerDto>> GetAllAsync()
         {
             return await _manufacturerDbSet

@@ -6,6 +6,7 @@ namespace WiseSwitchApi.Repository.Interfaces
     public interface ISwitchModelRepository : IGenericRepository<SwitchModel>
     {
         Task<SwitchModel> CreateFromObjectAsync(object value);
+        Task<bool> ExistsAsync(string name);
         Task<IEnumerable<IndexRowSwitchModelDto>> GetAllAsync();
         Task<int> GetBrandIdAsync(int switchModelId);
         Task<DisplaySwitchModelDto> GetDisplayModelAsync(int id);

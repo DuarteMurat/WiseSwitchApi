@@ -43,6 +43,11 @@ namespace WiseSwitchApi.Repository
             throw new NotImplementedException("Could not create entity because the model is not expected.");
         }
 
+        public async Task<bool> ExistsAsync(string name)
+        {
+            return await _brandDbSet.AnyAsync(brand => brand.Name == name);
+        }
+
         public async Task<IEnumerable<IndexRowBrandDto>> GetAllAsync()
         {
             return await _brandDbSet

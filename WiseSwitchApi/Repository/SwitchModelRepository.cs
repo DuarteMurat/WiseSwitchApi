@@ -34,6 +34,11 @@ namespace WiseSwitchApi.Repository
             throw new NotImplementedException();
         }
 
+        public async Task<bool> ExistsAsync(string modelName)
+        {
+            return await _switchModelDbSet.AnyAsync(switchModel => switchModel.ModelName == modelName);
+        }
+
         public async Task<IEnumerable<IndexRowSwitchModelDto>> GetAllAsync()
         {
             return await _switchModelDbSet

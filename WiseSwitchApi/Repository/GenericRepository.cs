@@ -30,11 +30,6 @@ namespace WiseSwitchApi.Repository
             return await _dbSet.AnyAsync(x => x.Id == id);
         }
 
-        public async Task<bool> ExistsAsync(string name)
-        {
-            return await _dbSet.AnyAsync(x => x.Name == name);
-        }
-
         public async Task<IEnumerable<T>> GetAllAsNoTrackingAsync()
         {
             return await _dbSet

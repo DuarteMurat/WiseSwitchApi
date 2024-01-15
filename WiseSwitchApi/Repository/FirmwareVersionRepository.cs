@@ -27,6 +27,11 @@ namespace WiseSwitchApi.Repository
             return await GetDisplayModelAsync(created.Id);
         }
 
+        public async Task<bool> ExistsAsync(string version)
+        {
+            return await _firmwareVersionDbSet.AnyAsync(firmwareVersion => firmwareVersion.Version == version);
+        }
+
         public async Task<IEnumerable<IndexRowFirmwareVersionDto>> GetAllAsync()
         {
             return await _firmwareVersionDbSet
