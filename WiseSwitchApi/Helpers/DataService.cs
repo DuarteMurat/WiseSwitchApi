@@ -20,17 +20,17 @@ namespace WiseSwitchApi.Helpers
             return dataOperation switch
             {
                 // Brand.
-                DataOperations.GetAllBrandsOrderByName => await _dataUnit.Brands.GetAllAsync(),
-                DataOperations.GetAllBrandsCombo => await _dataUnit.Brands.GetComboAsync(),
-                DataOperations.GetBrandDisplay => await _dataUnit.Brands.GetDisplayModelAsync((int)value),
-                DataOperations.GetBrandEditModel => await _dataUnit.Brands.GetEditModelAsync((int)value),
+                DataOperations.GetAllBrandsCombo => await _dataUnit.Brands.GetComboBrandsAsync(),
+                DataOperations.GetAllBrandsOrderByName => await _dataUnit.Brands.GetAllOrderByNameAsync(),
+                DataOperations.GetBrandDisplay => await _dataUnit.Brands.GetDisplayDtoAsync((int)value),
+                DataOperations.GetBrandEditModel => await _dataUnit.Brands.GetEditDtoAsync((int)value),
                 DataOperations.GetBrandExists => await _dataUnit.Brands.ExistsAsync((int)value),
-                DataOperations.GetBrandModel => await _dataUnit.Brands.GetAsNoTrackingAsync((int)value),
+                DataOperations.GetBrandModel => await _dataUnit.Brands.GetAsNoTrackingByIdAsync((int)value),
                 // Firmware Version.
                 DataOperations.GetAllFirmwareVersionsOrderByVersion => await _dataUnit.FirmwareVersions.GetAllOrderByVersionAsync(),
                 DataOperations.GetAllFirmwareVersionsCombo => await _dataUnit.FirmwareVersions.GetComboFirmwareVersionsAsync(),
-                DataOperations.GetFirmwareVersionDisplay => await _dataUnit.FirmwareVersions.GetDisplayModelAsync((int)value),
-                DataOperations.GetFirmwareVersionEditModel => await _dataUnit.FirmwareVersions.GetEditModelAsync((int)value),
+                DataOperations.GetFirmwareVersionDisplay => await _dataUnit.FirmwareVersions.GetDisplayDtoAsync((int)value),
+                DataOperations.GetFirmwareVersionEditModel => await _dataUnit.FirmwareVersions.GetEditDtoAsync((int)value),
                 DataOperations.GetFirmwareVersionExists => await _dataUnit.FirmwareVersions.ExistsAsync((int)value),
                 DataOperations.GetFirmwareVersionModel => await _dataUnit.FirmwareVersions.GetAsNoTrackingByIdAsync((int)value),
                 // Manufacturer.
