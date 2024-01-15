@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WiseSwitchApi.Repository.Interfaces;
 
 namespace WiseSwitchApi.Entities
 {
     public class SwitchModel : IEntity
     {
         public int Id { get; set; }
+
+        string IEntity.Name => ModelName;
 
 
         [Required]

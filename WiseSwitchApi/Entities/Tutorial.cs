@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Entities
 {
-    public class Tutorial : IEntity
+    public class Tutorial
     {
         public int Id { get; set; }
 

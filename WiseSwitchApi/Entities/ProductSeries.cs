@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using WiseSwitchApi.Repository.Interfaces;
 
 namespace WiseSwitchApi.Entities
 {

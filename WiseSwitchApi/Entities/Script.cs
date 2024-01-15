@@ -1,6 +1,6 @@
 ﻿namespace WiseSwitchApi.Entities
 {
-    public class Script : IEntity
+    public class Script
     {
         public int Id { get; set; }
 
