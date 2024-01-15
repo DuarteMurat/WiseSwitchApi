@@ -92,7 +92,7 @@ namespace WiseSwitchApi.Controllers
         {
             if (id < 1) return ControllerHelper.IdIsNotValid(id);
 
-            return await _helper.TryGet(DataOperations.GetProductSeriesModel, id);
+            return await _helper.TryGet(DataOperations.GetProductSeries, id);
         }
 
 

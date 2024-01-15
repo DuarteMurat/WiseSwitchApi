@@ -72,7 +72,7 @@ namespace WiseSwitchApi.Controllers
         {
             if (id < 1) return ControllerHelper.IdIsNotValid(id);
 
-            return await _helper.TryGet(DataOperations.GetFirmwareVersionModel, id);
+            return await _helper.TryGet(DataOperations.GetFirmwareVersion, id);
         }
 
 
